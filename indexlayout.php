@@ -25,39 +25,58 @@
 <hr />
 <div class="container">
 	<div class="row">
-		<div class="eightcol">
-			<div class="twocol">
-				<a href="btn1.html">Button 1</a>
-			</div>
-			<div class="twocol">
-				<a href="btn2.html">Button 2</a>
-			</div>
-			<div class="twocol">
-				<a href="btn3.html">Button 3</a>
-			</div>
-			<div class="twocol last">
-				<a href="btn4.html">Button 4</a>
-			</div>
-		</div>
-		<div class="fourcol last">
-			<form method="post" action="testlayout.html">
-			<div class="row">
-				<p><label for="id">Student ID:</label><input class="text" type="text" name="id" /></p>
-			</div>
-			<div class="row">
-				<p><label for="pw">Password:</label><input class="text" type="password" name="pw" /></p>
-			</div>
-			<div class="row topmargin5px">
+		<div class="row">
+			<div class="sevencol navbar">
 				<div class="threecol">
-					<a href="lostPassword.php">Forgot your password?</a> <br />
-					<a href="register.php">Register</a>
+					<a href="btn1.html" class="navbar">Button 1</a>
 				</div>
-				<div class="twocol last">
-					<input class="submit" type="submit" value="SUBMIT"/>
+				<div class="threecol">
+					<a href="btn2.html" class="navbar">Button 2</a>
+				</div>
+				<div class="threecol">
+					<a href="btn3.html" class="navbar">Button 3</a>
+				</div>
+				<div class="threecol last">
+					<a href="btn4.html" class="navbar">Button 4</a>
+				</div>
+				<div class="row selection">
+					<div class="tencol last">
+						<form name="sportsForm" action="testlayout.php" method="post">
+						<p>Sports type: &nbsp;
+						<select name="sportsType">
+						    <option value="Basketball">Basketball</option>
+						    <option value="Badminton">Badminton</option>
+						    <option value="Table Tennis">Table Tennis</option>
+						    <option value="Squash">Squash</option>
+						</select>
+						<input type="submit" value="Submit" />
+						</p>
+
+						</form>
+					</div>
 				</div>
 			</div>
-			</form>
+			<div class="threecol last loginbox">
+				<form method="post" action="testlayout.html">
+				<div class="row">
+					<p><label for="id">Student ID:</label><input class="text" type="text" name="id" /></p>
+				</div>
+				<div class="row">
+					<p><label for="pw">Password:</label><input class="text" type="password" name="pw" /></p>
+				</div>
+				<div class="row topmargin5px">
+					<div class="threecol">
+						<a href="lostPassword.php" class="loginbox">Forgot your password?</a> <br />
+						<a href="register.php" class="loginbox">Register</a>
+					</div>
+					<div class="twocol last">
+						<input class="submit" type="submit" value="SUBMIT"/>
+					</div>
+				</div>
+				</form>
+			</div>
 		</div>
+		
 	</div>
 </div>
 
