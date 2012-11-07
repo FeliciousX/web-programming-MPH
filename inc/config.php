@@ -6,7 +6,7 @@ class DBConfiguration {
     private $dbHost = "localhost";
     private $dbUserName = "root";
     private $dbPassword = "";
-    private $dbName = "SLDRBS";
+    private $dbName = "MPHbooking";
 
     public function getDbHost() {
         return $this->dbHost;
