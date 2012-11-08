@@ -168,8 +168,8 @@ public function register($staffID, $firstName, $lastName, $password, $repeatPass
                 throw new Exception('Password does not match.');
             }
 
-            if (strlen($password) < 8) {
-                throw new Exception('Password must be more than 8 characters.');
+            if (strlen($password) < 6) {
+                throw new Exception('Password must be 6 characters or more.');
             }
 
             $securimage = new Securimage();
@@ -182,15 +182,16 @@ public function register($staffID, $firstName, $lastName, $password, $repeatPass
             mt_srand(time());
             $activationCode = substr(md5(mt_rand(0, mt_getrandmax())), 0, 4);
 
-            $staffController = new StaffController();
-            $staff = $staffController->getAdmin($staffID);
+            $studentController = new StudentController();
+            $student = $studentController->getStudent($staffID);
 
-            if (sizeof($staff) != 0) {
+            if (sizeof($student) != 0) {
                 throw new Exception('Invalid Staff ID.');
             }
 
             $staffModel = new StaffModel();
-            $result = $staffModel->insertStaff($staffID, $firstname,$lastname, $password, $activationCode,0);
+            
+            $result = $staffModel->insertStaff($staffID, $firstName,$lastName, $password, $activationCode);
 
             if ($result) {
                 $header = 'From: noreply@mph.swinburne.edu.my';

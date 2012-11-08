@@ -15,7 +15,7 @@ class StaffModel {
     private $COLUMN_STAFF_FIRST_NAME = "StaffFirstName"; // VARCHAR
     private $COLUMN_STAFF_LAST_NAME = "StaffLastName"; // VARCHAR
     private $COLUMN_PASSWORD = "Password"; // VARCHAR
-    private $COLUMN_ACTIVATION_CODE = 'ActivationCode'; //TINYINT
+    private $COLUMN_ACTIVATION_CODE = 'ActivationCode'; //VARCHAR
     private $COLUMN_ACTIVATION_STATUS = 'ActivationStatus'; //TINYINT
     private $COLUMN_SUPER_ADMIN = "SuperAdmin"; // BOOLEAN
 
@@ -198,7 +198,7 @@ class StaffModel {
      * @return boolean TRUE if successful, FALSE if otherwise
      * @throws Exception connection error
      */
-    public function insertStaff($staffID, $password, $firstname,$lastname, $activationNumber,$superAdmin) {
+    public function insertStaff($staffID,  $firstname,$lastname,$password, $activationNumber) {
         $config = new DBConfiguration;
 
         $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
@@ -207,7 +207,7 @@ class StaffModel {
             throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
         }
 
-        $queryStr = "INSERT INTO $this->TABLE_STAFF VALUES('$staffID', '$firstname','$lasttname', '" . crypt($password, CRYPT_BLOWFISH) . "',$activationNumber,0, $superAdmin)";
+        $queryStr = "INSERT INTO $this->TABLE_STAFF VALUES('$staffID', '$firstname','$lastname', '" . crypt($password, CRYPT_BLOWFISH) . "','$activationNumber', 0, 0)";
         $result = $staffTable->query($queryStr);
 
         $staffTable->close();

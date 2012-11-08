@@ -15,6 +15,25 @@ class StudentController {
         return $studentModel->selectAllStudent();
     }
 
+      public function getStudent($studentID) {
+        $result = FALSE;
+
+        $studentID = stripslashes($studentID);
+
+        if (empty($studentID)) {
+            throw new Exception('Student ID cannot be empty.');
+        }
+
+        try {
+            $studentModel = new StudentModel();
+            $result = $studentModel->selectAStudent($studentID);
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+        return $result;
+    }
+
     public function getAllStudentByID($studentID) {
         $studentID = stripslashes($studentID);
 
@@ -189,8 +208,8 @@ class StudentController {
                 throw new Exception('Password does not match.');
             }
 
-            if (strlen($password) < 8) {
-                throw new Exception('Password must be more than 8 characters.');
+            if (strlen($password) < 6) {
+                throw new Exception('Password must be 6 characters or more.');
             }
 
             $securimage = new Securimage();
@@ -203,15 +222,15 @@ class StudentController {
             mt_srand(time());
             $activationCode = substr(md5(mt_rand(0, mt_getrandmax())), 0, 4);
 
-            $studentController = new StudentController();
-            $student = $studentController->getStudent($studentID);
+            $staffController = new StaffController();
+            $staff = $staffController->getStaff($studentID);
 
-            if (sizeof($student) != 0) {
+            if (sizeof($staff) != 0) {
                 throw new Exception('Invalid Student ID.');
             }
 
             $studentModel = new StudentModel();
-            $result = $studentModel->insertStudent($studentID, $firstname,$lastname, $password, $activationCode);
+            $result = $studentModel->insertStudent($studentID, $firstName,$lastName, $password, $activationCode);
 
             if ($result) {
                 $header = 'From: noreply@mph.swinburne.edu.my';

@@ -15,7 +15,7 @@ class StudentModel {
     private $COLUMN_STUDENT_FIRST_NAME = "StudentFirstName"; // VARCHAR
     private $COLUMN_STUDENT_LAST_NAME = "StudentLastName"; // VARCHAR
     private $COLUMN_PASSWORD = "Password"; // VARCHAR
-    private $COLUMN_ACTIVATION_CODE = 'ActivationCode'; //TINYINT
+    private $COLUMN_ACTIVATION_CODE = 'ActivationCode'; //VARCHAR
     private $COLUMN_ACTIVATION_STATUS = 'ActivationStatus'; //TINYINT
 
     /**
@@ -47,6 +47,38 @@ class StudentModel {
 
         return $result;
     }
+
+       public function selectAStudent($studentID) {
+        $studentList = array();
+        $config = new DBConfiguration;
+
+        $studentTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
+
+        if (strcmp($studentTable->connect_error, "") != 0) {
+            throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
+        }
+
+        $queryStr = "SELECT * FROM $this->TABLE_STUDENT WHERE $this->COLUMN_STUDENTID = '$studentID'";
+        $result = $studentTable->query($queryStr);
+
+        if ($studentTable->affected_rows > 0) {
+            for ($i = 0; $i < $result->num_rows; $i++) {
+                $row = $result->fetch_assoc();
+                $studentList[$i][$this->COLUMN_STUDENTID] = $row[$this->COLUMN_STUDENTID];
+                $studentList[$i][$this->COLUMN_STUDENT_FIRST_NAME] = $row[$this->COLUMN_STUDENT_FIRST_NAME];
+                $studentList[$i][$this->COLUMN_STUDENT_LAST_NAME] = $row[$this->COLUMN_STUDENT_LAST_NAME];
+                $studentList[$i][$this->COLUMN_ACTIVATION_STATUS] = $row[$this->COLUMN_ACTIVATION_STATUS];
+                
+            }
+        }
+
+        $studentTable->close();
+
+        return $studentList;
+    }
+
+  
+
 
     public function selectAllStudent() {
         $studentList = array();

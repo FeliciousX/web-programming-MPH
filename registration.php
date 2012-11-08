@@ -50,13 +50,19 @@ $registrationView->validateSession();
                             <fieldset>
                                 <legend>Login Information</legend>
                                 <?php 
+                                if(isset($_POST['ss']))
+                                {
 
                                 if($_POST['ss'] == "student")
                                     {$registrationView->validateStudentRegistrationData();}
                                     
-                                else if($_POST['ss'] = "staff"){$registrationView->validateStudentRegistrationData();} ?>
+                                else if($_POST['ss'] = "staff")
+                                    {$registrationView->validateStaffRegistrationData();} 
+                                }
+                              
+                                ?>
                                 
-                                <input type="radio" name="ss" value="student">Student Registration<br>
+                                <input type="radio" name="ss" value="student" checked = "true">Student Registration<br>
                                 <input type="radio" name="ss" value="staff">Staff Registration
 
                                     <label for="Username">Username

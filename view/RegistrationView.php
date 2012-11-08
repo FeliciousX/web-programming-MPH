@@ -10,8 +10,8 @@ require_once('model/StaffModel.php');
 /**
  * Description of RegistrationView
  *
- * @author Benedict Khoo
- * @version 2012-06-24
+ * @author LiewKitLoong
+ * @version 2012-11-08
  * @package view
  */
 class RegistrationView {
@@ -35,10 +35,7 @@ class RegistrationView {
         }
     }
 
-    /**
-     * @author Calvin
-     * @author Benedict Khoo 
-     */
+
     public function validateStudentRegistrationData() {
         if (isset($_POST['Register'])) {
             try {
@@ -61,7 +58,7 @@ class RegistrationView {
                
 
                 $staffController = new StaffController();
-                $staffontroller->register($_POST['Username'], $_POST['FirstName'], $_POST['LastName'], $_POST['Password'], $_POST['RepeatPassword'], $_POST['Captcha']);
+                $staffController->register($_POST['Username'], $_POST['FirstName'], $_POST['LastName'], $_POST['Password'], $_POST['RepeatPassword'], $_POST['Captcha']);
 
                 echo '<p class="success_message">Registration is successful.<br />Please check your Swinburne email for instructions on how to activate your account. Please check your junk folder.</p>';
             } 
@@ -72,8 +69,6 @@ class RegistrationView {
     }
 
     /**
-     * @author Marshal Daniel
-     * @author Benedict Khoo
      * 
      * @throws Exception 
      */
@@ -93,8 +88,14 @@ class RegistrationView {
 
                 mt_srand(time());
                 $name = md5(mt_rand(0, mt_getrandmax()));
+                 if (sizeof($student) == 1 && $student['ActivationStatus'] == 1) {
 
-               if (sizeof($student) == 1 && $student['ActivationStatus'] == 0) {
+                    $sessionManager->startSession($name, 0, $username, 0);
+                    header('Location: user/index.php');
+                    exit;
+                }
+
+               elseif (sizeof($student) == 1 && $student['ActivationStatus'] == 0) {
                     throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
                 }
 
