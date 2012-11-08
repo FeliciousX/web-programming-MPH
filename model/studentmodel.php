@@ -1,5 +1,6 @@
 <?php
 
+//require_once('../inc/config.php');
 /**
  * Description of StudentModel
  *

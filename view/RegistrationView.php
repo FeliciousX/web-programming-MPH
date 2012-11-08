@@ -1,11 +1,10 @@
 <?php
 
-require_once('Controller/SessionManager.php');
-require_once('Controller/AdminController.php');
-require_once('Controller/UserController.php');
-
-require_once('Model/AdminModel.php');
-require_once('Model/UserModel.php');
+require_once('controller/SessionManager.php');
+require_once('controller/StaffController.php');
+require_once('controller/StudentController.php');
+require_once('model/StudentModel.php');
+require_once('model/StaffModel.php');
 
 
 /**
@@ -40,13 +39,29 @@ class RegistrationView {
      * @author Calvin
      * @author Benedict Khoo 
      */
-    public function validateRegistrationData() {
+    public function validateStudentRegistrationData() {
         if (isset($_POST['Register'])) {
             try {
                
 
-                $userController = new UserController();
-                $userController->register($_POST['Username'], $_POST['FirstName'], $_POST['LastName'], $_POST['Password'], $_POST['RepeatPassword'], $_POST['Captcha']);
+                $studentController = new StudentController();
+                $studentController->register($_POST['Username'], $_POST['FirstName'], $_POST['LastName'], $_POST['Password'], $_POST['RepeatPassword'], $_POST['Captcha']);
+
+                echo '<p class="success_message">Registration is successful.<br />Please check your Swinburne email for instructions on how to activate your account. Please check your junk folder.</p>';
+            } 
+            catch (Exception $e) {
+                echo '<p class="error_message">' . $e->getMessage() . '</p>';
+            }
+        }
+    }
+
+        public function validateStaffRegistrationData() {
+        if (isset($_POST['Register'])) {
+            try {
+               
+
+                $staffController = new StaffController();
+                $staffontroller->register($_POST['Username'], $_POST['FirstName'], $_POST['LastName'], $_POST['Password'], $_POST['RepeatPassword'], $_POST['Captcha']);
 
                 echo '<p class="success_message">Registration is successful.<br />Please check your Swinburne email for instructions on how to activate your account. Please check your junk folder.</p>';
             } 
@@ -68,23 +83,23 @@ class RegistrationView {
                 $username = $_POST['Username'];
                 $password = $_POST['Password'];
 
-                $userController = new UserController();
-                $adminController = new AdminController();
+                $studentController = new StudentController();
+                $staffController = new StaffController();
                 $sessionManager = new SessionManager();
                 
 
-                $user = $userController->authenticateUser($username, $password);
-                $validAdmin = $adminController->authenticateAdmin($username, $password);
+                $student = $studentController->authenticateUser($username, $password);
+                $validstaff = $staffController->authenticateStaff($username, $password);
 
                 mt_srand(time());
                 $name = md5(mt_rand(0, mt_getrandmax()));
 
-               if (sizeof($user) == 1 && $user['ActivationStatus'] == 0) {
+               if (sizeof($student) == 1 && $student['ActivationStatus'] == 0) {
                     throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
                 }
 
-                if (!is_null($validAdmin)) {
-                    $superAdminStatus = $validAdmin[0]['SuperAdmin'];
+                if (!is_null($validstaff)) {
+                    $superAdminStatus = $validstaff[0]['SuperAdmin'];
 
                     $sessionManager->startSession($name, 1, $username, $superAdminStatus);
                     header('Location: admin/index.php');

@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once('config.php');
-require_once('View/RegistrationView.php');
+require_once('inc/config.php');
+require_once('view/RegistrationView.php');
 require_once('securimage/securimage.php');
 
 
@@ -49,8 +49,15 @@ $registrationView->validateSession();
                         <form action="registration.php" method="post">
                             <fieldset>
                                 <legend>Login Information</legend>
-                                <?php $registrationView->validateRegistrationData(); ?>
+                                <?php 
+
+                                if($_POST['ss'] == "student")
+                                    {$registrationView->validateStudentRegistrationData();}
+                                    
+                                else if($_POST['ss'] = "staff"){$registrationView->validateStudentRegistrationData();} ?>
                                 
+                                <input type="radio" name="ss" value="student">Student Registration<br>
+                                <input type="radio" name="ss" value="staff">Staff Registration
 
                                     <label for="Username">Username
                                         <span>Student ID</span>

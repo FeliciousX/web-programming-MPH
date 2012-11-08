@@ -1,5 +1,6 @@
 <?php
 
+//require_once('../inc/config.php');
 /**
  * StaffModel Model class for Staff table
  * 
@@ -49,7 +50,7 @@ class StaffModel {
         return $result;
     }
     
-    public function selectAnStaff($staffID) {
+    public function selectAStaff($staffID) {
         $staffList = array();
         $config = new DBConfiguration;
 
@@ -118,18 +119,72 @@ class StaffModel {
         $result = $staffTable->query($queryStr);
 
         if ($staffTable->affected_rows > 0) {
-            for ($i = 0; $i < $result->num_rows; $i++) {
+            for ($i = 0; $i < $result->num_rows; $i++) 
+            {
                 $row = $result->fetch_assoc();
                  $staffList[$i][$this->COLUMN_STAFFID] = $row[$this->COLUMN_STAFFID];
                 $staffList[$i][$this->COLUMN_STAFF_FIRST_NAME] = $row[$this->COLUMN_STAFF_FIRST_NAME];
                 $staffList[$i][$this->COLUMN_STAFF_LAST_NAME] = $row[$this->COLUMN_STAFF_LAST_NAME];
                 $staffList[$i][$this->COLUMN_ACTIVATION_STATUS] = $row[$this->COLUMN_ACTIVATION_STATUS];
                 $staffList[$i][$this->COLUMN_SUPER_ADMIN] = $row[$this->COLUMN_SUPER_ADMIN];
+            }
         }
 
         $staffTable->close();
 
         return $staffList;
+    }
+
+    public function selectStaffActivationStatus($staffID) 
+    {
+        $activationStatus = -1;
+        $config = new DBConfiguration();
+
+        $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
+
+        if (strcmp($staffTable->connect_error, "") != 0) 
+        {
+            throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
+        }
+
+        $queryStr = "SELECT $this->COLUMN_ACTIVATION_STATUS FROM $this->TABLE_STAFF WHERE $this->COLUMN_STAFFID = '$staffID'";
+        $result = $staffTable->query($queryStr);
+
+        if ($result->num_rows == 1) 
+        {
+            $row = $result->fetch_assoc();
+            ($row[$this->COLUMN_ACTIVATION_STATUS] == 1) ? $activationStatus = 1 : $activationStatus = 0;
+        }
+
+        $staffTable->close();
+
+        return $activationStatus;
+    }
+
+    public function selectStaffActivationCode($staffID) 
+    {
+        $activationCode = 0;
+        $config = new DBConfiguration();
+
+        $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
+
+        if (strcmp($staffTable->connect_error, "") != 0) 
+        {
+            throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
+        }
+
+        $queryStr = "SELECT $this->COLUMN_ACTIVATION_CODE FROM $this->TABLE_STAFF WHERE $this->COLUMN_STAFFID = '$staffID'";
+        $result = $staffTable->query($queryStr);
+
+        if ($result->num_rows == 1) 
+        {
+            $row = $result->fetch_assoc();
+            $activationCode = $row[$this->COLUMN_ACTIVATION_CODE];
+        }
+
+        $staffTable->close();
+
+        return $activationCode;
     }
 
     /**
@@ -243,7 +298,7 @@ class StaffModel {
 
         $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
 
-        $queryStr = "UPDATE $this->TABLE_STUDENT SET $this->COLUMN_ACTIVATION_CODE = '$activationCode' WHERE $this->COLUMN_STAFFID = '$staffID'";
+        $queryStr = "UPDATE $this->TABLE_STAFF SET $this->COLUMN_ACTIVATION_CODE = '$activationCode' WHERE $this->COLUMN_STAFFID = '$staffID'";
         $result = $staffTable->query($queryStr);
 
         $staffTable->close();
@@ -257,7 +312,7 @@ class StaffModel {
 
         $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
 
-        $queryStr = "UPDATE $this->TABLE_STUDENT SET $this->COLUMN_ACTIVATION_STATUS = 1 WHERE $this->COLUMN_STAFFID = '$staffID' AND $this->COLUMN_ACTIVATION_CODE = '$activationCode' AND $this->COLUMN_ACTIVATION_STATUS = 0";
+        $queryStr = "UPDATE $this->TABLE_STAFF SET $this->COLUMN_ACTIVATION_STATUS = 1 WHERE $this->COLUMN_STAFFID = '$staffID' AND $this->COLUMN_ACTIVATION_CODE = '$activationCode' AND $this->COLUMN_ACTIVATION_STATUS = 0";
         $result = $staffTable->query($queryStr);
 
         $staffTable->close();
@@ -271,7 +326,7 @@ class StaffModel {
 
         $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
 
-        $queryStr = "UPDATE $this->TABLE_STUDENT SET $this->COLUMN_ACTIVATION_STATUS = $accountStatus WHERE $this->COLUMN_STAFFID = '$staffID' AND $this->COLUMN_ACTIVATION_STATUS != $accountStatus";
+        $queryStr = "UPDATE $this->TABLE_STAFF SET $this->COLUMN_ACTIVATION_STATUS = $accountStatus WHERE $this->COLUMN_STAFFID = '$staffID' AND $this->COLUMN_ACTIVATION_STATUS != $accountStatus";
         $result = $staffTable->query($queryStr);
 
         $staffTable->close();
