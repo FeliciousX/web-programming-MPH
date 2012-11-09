@@ -15,68 +15,30 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container heading">
 	<div class="row">
 		<div class="twelvecol">
 			<h1 class="centerText">Some Kind of Booking System</h1>
 		</div>
 	</div>
 </div>
-<hr />
+<?php include 'inc/navbar.php' ?>
 <div class="container">
-	<div class="row">
-		<div class="row">
-			<div class="sevencol navbar">
-				<div class="threecol">
-					<a href="btn1.html" class="navbar">Button 1</a>
-				</div>
-				<div class="threecol">
-					<a href="btn2.html" class="navbar">Button 2</a>
-				</div>
-				<div class="threecol">
-					<a href="btn3.html" class="navbar">Button 3</a>
-				</div>
-				<div class="threecol last">
-					<a href="btn4.html" class="navbar">Button 4</a>
-				</div>
-				<div class="row selection">
-					<div class="tencol last">
-						<form name="sportsForm" action="testlayout.php" method="post">
-						<p>Sports type: &nbsp;
-						<select name="sportsType">
-						    <option value="Basketball">Basketball</option>
-						    <option value="Badminton">Badminton</option>
-						    <option value="Table Tennis">Table Tennis</option>
-						    <option value="Squash">Squash</option>
-						</select>
-						<input type="submit" value="Submit" />
-						</p>
-
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="threecol last loginbox">
-				<form method="post" action="testlayout.html">
-				<div class="row">
-					<p><label for="id">Student ID:</label><input class="text" type="text" name="id" /></p>
-				</div>
-				<div class="row">
-					<p><label for="pw">Password:</label><input class="text" type="password" name="pw" /></p>
-				</div>
-				<div class="row topmargin5px">
-					<div class="threecol">
-						<a href="lostPassword.php" class="loginbox">Forgot your password?</a> <br />
-						<a href="register.php" class="loginbox">Register</a>
-					</div>
-					<div class="twocol last">
-						<input class="submit" type="submit" value="SUBMIT"/>
-					</div>
-				</div>
-				</form>
-			</div>
+	<div class="row selection">
+		<div class="twelvecol last centerObjects">
+			<form name="sportsForm" action="testlayout.php" method="post">
+			<p>Sports type: &nbsp;
+			<select name="sportsType">
+			    <option value="Basketball">Basketball</option>
+			    <option value="Badminton">Badminton</option>
+			    <option value="Table Tennis">Table Tennis</option>
+			    <option value="Squash">Squash</option>
+			    <option value="Multistorey Carpark">Multistorey Carpark (Futsal & Tennis)</option>
+			</select>
+			<input type="submit" value="Submit" />
+			</p>
+			</form>
 		</div>
-		
 	</div>
 </div>
 
