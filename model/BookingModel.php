@@ -2,20 +2,15 @@
 
 /**
  * Booking Model class for Staff table
- * 
- * @author Churchill Lee
- * @version 2012-11-08
- * @package Model
  */
 class BookingModel {
 	private $TABLE_BOOKING = "Booking";
-	private $COLUMN_BOOKINGID = "BookingID"; // INTEGER
 	private $COLUMN_BOOKERID = "BookerID"; // VARCHAR
 	private $COLUMN_BOOKING_DATE = "BookingDate"; // DATE
 	private $COLUMN_BOOKING_START_TIME = "BookingStartTime"; // TIME
-	private $COLUMN_BOOKING_END_TIME = "BookingEndTime";
-	private $COLUMN_SPORT = "Sport";
-	private $COLUMN_COURTID = "CourtID";
+	private $COLUMN_BOOKING_END_TIME = "BookingEndTime"; // TIME
+	private $COLUMN_SPORT = "Sport"; // VARCHAR
+	private $COLUMN_COURTID = "CourtID"; // INTEGER
 
 	public function createBookingTable() {
 		$config = new DBConfiguration();
@@ -27,14 +22,14 @@ class BookingModel {
 		}
 
 		$queryStr = "CREATE TABLE $this->TABLE_BOOKING (
-			$this->COLUMN_BOOKINGID INTEGER AUTO_INCREMENT NOT NULL,
 			$this->COLUMN_BOOKERID VARCHAR(15) NOT NULL,
 			$this->COLUMN_BOOKING_DATE DATE NOT NULL,
-			$this->COLUMN_BOOKING_START_TIME DATE NOT NULL,
-			$this->COLUMN_BOKING_END_TIME DATE NOT NULL,
+			$this->COLUMN_BOOKING_START_TIME TIME NOT NULL,
+			$this->COLUMN_BOOKING_END_TIME TIME NOT NULL,
 			$this->COLUMN_SPORT VARCHAR(50) NOT NULL,
 			$this->COLUMN_COURTID INTEGER NOT NULL,
-			PRIMARY KEY($this->COLUMN_BOOKERID, $this->COLUMN_BOOKING_DATE));"
+			PRIMARY KEY($this->COLUMN_BOOKERID, $this->COLUMN_BOOKING_DATE));";
+
 		$result = $bookingTable->query($queryStr);
 
 		$bookingTable->close();
@@ -63,7 +58,7 @@ class BookingModel {
 	public function selectABooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport, $courtID)
 	{
 		$booking = null;
-		$config = new DBConfiguration()
+		$config = new DBConfiguration();
 
 		$bookingTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
 
@@ -98,7 +93,7 @@ class BookingModel {
 	public function selectAllBooking() 
 	{
 		$booking = null;
-		$config = new DBConfiguration()
+		$config = new DBConfiguration();
 
 		$bookingTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
 
@@ -150,7 +145,7 @@ class BookingModel {
                 $booking[$i]['StudentFirstName'] = $row['StudentFirstName'];
                 $booking[$i]['StudentLastName'] = $row['StudentLastName'];
                 $booking[$i][$this->COLUMN_BOOKERID] = $row[$this->COLUMN_BOOKERID];
-                $booking[$i][$this->COLUMN_COURTID]
+                $booking[$i][$this->COLUMN_COURTID];
                 $booking[$i][$this->COLUMN_BOOKING_START_TIME] = $row[$this->COLUMN_BOOKING_START_TIME];
                 $booking[$i][$this->COLUMN_BOOKING_END_TIME] = $row[$this->COLUMN_BOOKING_END_TIME];
             }
