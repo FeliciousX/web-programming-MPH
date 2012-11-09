@@ -9,11 +9,9 @@ require_once('../securimage/securimage.php');
 /**
  * registration.php
  * 
- * @author Auwal Sagir
  * @author Churchill Lee
  * @author Isaac Yong
- * @author Benedict Khoo
- * @version 2012-05-28
+ * @version 2012-11-09
  */
 function registerAdmin() {
     if (isset($_POST['Register'])) {

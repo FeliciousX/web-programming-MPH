@@ -3,8 +3,8 @@
 /**
  * Description of SessionManager
  *
- * @author Benedict Khoo
- * @version 2012-06-24
+ * @author 
+ * @version 2012-11-09
  * @package controller
  */
 class SessionManager {
@@ -12,18 +12,6 @@ class SessionManager {
     private $USERPATH = "/user";
     private $ADMINPATH = "/";
 
-    private static function preventHijacking() {
-        if (!isset($_SESSION['IPaddress']) || !isset($_SESSION['userAgent']))
-            return false;
-
-        if ($_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
-            return false;
-
-        if ($_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
-            return false;
-
-        return true;
-    }
 
     private static function regenerateSession() {
         // If this session is obsolete it means there already is a new id
@@ -74,30 +62,12 @@ class SessionManager {
     }
 
     public function startSession($name, $userType, $id, $superAdminStatus, $domain = null, $secureHttp = false, $http = false) {
-//        $domain = isset($domain) ? $domain : $_SERVER['SERVER_NAME'];
-//
-//        session_name($name . '_SESSION');
-//        if ($userType == 0) {
-//            session_set_cookie_params(3600, $this->USERPATH, $domain, $secureHttp, $http); // User
-//        } else {
-//            session_set_cookie_params(0, $this->ADMINPATH, $domain, $secureHttp, $http); // Admin
-//        }
+
         session_start();
 
         (($userType == 0) ? $this->createUserSession($id) : $this->createAdminSession($id, $superAdminStatus));
 
-//        if ($this->validateSession()) {
-//            if (!$this->preventHijacking()) {
-//                $_SESSION = array();
-//                $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
-//                $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
-//                $this->regenerateSession();
-//            }
-//        } else {
-//            $_SESSION = array();
-//            session_destroy();
-//            session_start();
-//        }
+
     }
 
     public function authenticateSession() {

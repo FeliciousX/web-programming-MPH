@@ -19,11 +19,6 @@ class RegistrationView {
     public function validateSession() {
         $sessionManager = new SessionManager();
         
-        // if ($sessionManager->authenticateReservationSession()) {
-        //     header('Location: reservation/index.php');
-        //     exit;
-        // }
-        
         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
             if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
                 header('Location: admin/index.php');
@@ -86,28 +81,49 @@ class RegistrationView {
                 $student = $studentController->authenticateUser($username, $password);
                 $validstaff = $staffController->authenticateStaff($username, $password);
 
-                mt_srand(time());
-                $name = md5(mt_rand(0, mt_getrandmax()));
-                 if (sizeof($student) == 1 && $student['ActivationStatus'] == 1) {
+                if ($student || $validstaff) {
+                     mt_srand(time());
+                    $name = md5(mt_rand(0, mt_getrandmax()));
+                     if (sizeof($student) == 1 && $student['ActivationStatus'] == 1) {
 
-                    $sessionManager->startSession($name, 0, $username, 0);
-                    header('Location: user/index.php');
-                    exit;
-                }
+                        $sessionManager->startSession($name, 0, $username, 0);
+                        header('Location: user/index.php');
+                        exit;
+                    }
 
-               elseif (sizeof($student) == 1 && $student['ActivationStatus'] == 0) {
-                    throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
-                }
+                   elseif (sizeof($student) == 1 && $student['ActivationStatus'] == 0) {
+                        throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
+                    }
+                    
+                    if( !is_null($validstaff))
+                    {
+                        $superAdminStatus = $validstaff['SuperAdmin'];
+                    if($superAdminStatus  == 1)
+                    {
+                         
+                        $sessionManager->startSession($name, 1, $username, $superAdminStatus);
+                        header('Location: admin/index.php');
+                        exit;
+                    }
+                    elseif($superAdminStatus  == 0)
+                    {
+                         if (sizeof($validstaff) == 1 & $validstaff['ActivationStatus'] == 1) 
+                        {
 
-                if (!is_null($validstaff)) {
-                    $superAdminStatus = $validstaff[0]['SuperAdmin'];
-
-                    $sessionManager->startSession($name, 1, $username, $superAdminStatus);
-                    header('Location: admin/index.php');
-                    exit;
-                }
-
+                        $sessionManager->startSession($name, 0, $username, 0);
+                        header('Location: user/index.php');
+                        exit;
+                        }
+                        else
+                        {
+                            throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
+                        }
+                    }
+                }               
+            }
+            elseif (!$student && !$validstaff) {                
                 throw new Exception('Invalid username or password.');
+            }
             } catch (ErrorException $e) {
                 echo '<p class="error_message">' . $e->getMessage() . '</p>';
             } catch (mysqli_sql_exception $e) {

@@ -81,7 +81,7 @@ class StaffModel {
 
   
     public function selectStaff($staffID, $password) {
-        $staffList = null;
+        $staffList = array();
         $config = new DBConfiguration;
 
         $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
@@ -90,19 +90,48 @@ class StaffModel {
             throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
         }
 
-        $queryStr = "SELECT $this->COLUMN_SUPER_ADMIN FROM $this->TABLE_STAFF WHERE $this->COLUMN_STAFFID LIKE '$staffID' AND $this->COLUMN_PASSWORD = '" . crypt($password, CRYPT_BLOWFISH) . "'";
+        $queryStr = "SELECT * FROM $this->TABLE_STAFF WHERE $this->COLUMN_STAFFID = '$staffID'  AND $this->COLUMN_PASSWORD = '" . crypt($password, CRYPT_BLOWFISH) . "'";
         $result = $staffTable->query($queryStr);
 
         if ($staffTable->affected_rows > 0) {
-            for ($i = 0; $i < $result->num_rows; $i++) {
-                $row = $result->fetch_assoc();
-                $staffList[$i] = $row[$this->COLUMN_SUPER_ADMIN];
-            }
+            
+                $staffList = $result->fetch_assoc();
         }
 
         $staffTable->close();
 
         return $staffList;
+    }
+
+      public function selectStaffActivate($staffID, $password) {
+        try {
+            $staff = array();
+            $config = new DBConfiguration();
+
+            $staffTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
+
+            if (strcmp($staffTable->connect_error, "") != 0) {
+                throw new Exception('We are currently experiencing some heavy traffic. Please try again later.');
+            }
+
+            $queryStr = "SELECT $this->COLUMN_ACTIVATION_STATUS FROM $this->TABLE_STAFF WHERE $this->COLUMN_STAFFID LIKE '$staffID' AND $this->COLUMN_PASSWORD LIKE '" . crypt($password, CRYPT_BLOWFISH) . "'";
+            $result = $staffTable->query($queryStr);
+
+            if ($staffTable->affected_rows == 1) {
+                $row = $result->fetch_assoc();
+                $staff[$this->COLUMN_ACTIVATION_STATUS] = $row[$this->COLUMN_ACTIVATION_STATUS];
+            }
+
+            $staffTable->close();
+
+            return $staff;
+        } catch (ErrorException $e) {
+            throw $e;
+        } catch (mysqli_sql_exception $e) {
+            throw $e;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function selectAllStaff() {
