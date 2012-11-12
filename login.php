@@ -1,3 +1,8 @@
+<?php
+	require_once('view/RegistrationView.php');
+
+	$registrationView = new RegistrationView();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +20,7 @@
 </head>
 
 <body>
-<div class="container heading">
-	<div class="row">
-		<div class="twelvecol">
-			<h1 class="centerText">Some Kind of Booking System</h1>
-		</div>
-	</div>
-</div>
+<?php include 'inc/header.php' ?>
 <?php include 'inc/navbar.php' ?>
 <div class="container">
 	<div class="row">
@@ -29,20 +28,21 @@
 			&nbsp;
 		</div>
 		<div class="threecol loginbox">
-			<form method="post" action="login.php">
+			<?php $registrationView->validateLoginData(); ?>
+			<form method="post" action="login.php" id="login_form">
 			<div class="row">
-				<p><label for="id">Student ID:</label><input class="text" type="text" name="id" /></p>
+				<p><label for="Username">Student ID:</label><input class="text" type="text" name="Username" /></p>
 			</div>
 			<div class="row">
-				<p><label for="pw">Password:</label><input class="text" type="password" name="pw" /></p>
+				<p><label for="Password">Password:</label><input class="text" type="password" name="Password" /></p>
 			</div>
 			<div class="row topmargin5px">
 				<div class="threecol">
 					<a href="lostPassword.php" class="loginbox">Forgot your password?</a> <br />
-					<a href="register.php" class="loginbox">Register</a>
+					<a href="registration.php" class="loginbox">Register</a>
 				</div>
 				<div class="twocol last">
-					<input class="submit" type="submit" value="SUBMIT"/>
+					<input class="submit" type="submit" value="LOGIN" name="Login"/>
 				</div>
 			</div>
 			</form>

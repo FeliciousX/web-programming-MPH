@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once('view/LoginView.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +19,11 @@
 </head>
 
 <?php
+	$loginView = new LoginView();
 	echo '
 	<div class="container navcontainer">
 		<div class="row">
-			<div class="elevencol last navbar">
+			<div class="twelvecol last navbar">
 				<div class="threecol">
 					<a href="btn1.html" class="navbar">Button 1</a>
 				</div>
@@ -28,13 +33,12 @@
 				<div class="threecol">
 					<a href="btn3.html" class="navbar">Button 3</a>
 				</div>
-				<div class="threecol last">
-					<a href="login.php" class="navbar">Login</a>
-				</div>
+				<div class="threecol last">';
+					$loginView->validateSession();
+	echo '		</div>
 			</div>
 		</div>
-	</div>
-		'
+	</div>';
 
 ?>
 

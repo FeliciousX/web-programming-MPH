@@ -15,13 +15,7 @@
 </head>
 
 <body>
-<div class="container heading">
-	<div class="row">
-		<div class="twelvecol">
-			<h1 class="centerText">Some Kind of Booking System</h1>
-		</div>
-	</div>
-</div>
+<?php include 'inc/header.php' ?>
 <?php include 'inc/navbar.php' ?>
 <div class="container">
 	<div class="row selection">
