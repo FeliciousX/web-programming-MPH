@@ -7,6 +7,10 @@
 	}
 
 	label {
+		font-weight: bold;
+	}
+
+	label.loginbox {
 		float:left;
 		text-align:left;
 		width:90px;
@@ -26,7 +30,7 @@
 		color: #FFF;
 		width:100px;
 		height:35px;
-		margin-top: 8%;
+		margin-top: 5%;
 		clear:both;
 		border: 2px solid #3869A3;
 		border-radius: 8px;
@@ -50,6 +54,30 @@
 		width:60px;
 	}
 
+	span {
+		color:grey;
+		font-size: 0.8em;
+		display:block;
+		position: relative;
+		clear:both;
+	}
+
+	legend {
+		font-size: 1.1em;
+		font-weight: bold;
+		padding: .4em .8em;
+		background: white;
+		border: 1px solid #BBB;
+	}
+
+	fieldset {
+		border: 1px solid #BBB;
+		padding: 10px;
+		position: relative;
+		background: #E9E9E9;
+		margin-bottom: 10px;
+	}
+
 	.heading {
 		background-color:#4DB2FA;
 		color:white;
@@ -69,11 +97,14 @@
 		background-color:#FFD1DB;
 	}
 
+	.loginlegend {
+		background-color:#DB6239; 
+		color:white;
+		font-variant: small-caps;
+	}
 	.loginbox { 
 		padding-top: 3px;
 		padding-left: 3px;
-		background-color: #DE4C3C;
-		color: white;
 		margin:auto;
 	}
 	.loginlabel {
@@ -89,11 +120,25 @@
 		width:200px;
 	}
 
-	a.loginbox:link, a:link { color:white; border:none; }
-	a.loginbox:visited, a:visited { color:#FFF9ED; border:none; }
-	a.loginbox:hover, a:hover { color:#C9F0FF; }
+	a.loginbox:link { color:grey; }
+	a.loginbox:visited{ color:grey; }
+	a.loginbox:hover{ color:blue; }
+	a:link { color:white; border:none; }
+	a:visited { color:#FFF9ED; border:none; }
+	a:hover { color:#C9F0FF; }
 
 	.row .topmargin5px{ margin-top:5px; }
+	.row .registration { 
+		margin-top:12px;
+		padding-bottom:6px;
+	}
+
+	.row .loginrow {
+		margin-top:5px;
+		padding-bottom:6px;
+		max-width: 340px;
+	}
+
 	.container { margin-top:5px; }
 	.centerText { text-align:center; }
 	.centerObjects {

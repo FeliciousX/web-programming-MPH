@@ -24,31 +24,31 @@
 <?php include 'inc/navbar.php' ?>
 <div class="container">
 	<div class="row">
-		<div class="fourcol">
-			&nbsp;
-		</div>
-		<div class="threecol loginbox">
-			<?php $registrationView->validateLoginData(); ?>
-			<form method="post" action="login.php" id="login_form">
-			<div class="row">
-				<p><label for="Username">Student ID:</label><input class="text" type="text" name="Username" /></p>
-			</div>
-			<div class="row">
-				<p><label for="Password">Password:</label><input class="text" type="password" name="Password" /></p>
-			</div>
-			<div class="row topmargin5px">
-				<div class="threecol">
-					<a href="lostPassword.php" class="loginbox">Forgot your password?</a> <br />
-					<a href="registration.php" class="loginbox">Register</a>
-				</div>
-				<div class="twocol last">
-					<input class="submit" type="submit" value="LOGIN" name="Login"/>
-				</div>
-			</div>
-			</form>
-		</div>
-		<div class="fivecol last">
-			&nbsp;
+		<div class="fourcol"></div>
+		<div class="twocol">
+			<fieldset>
+				<legend class="loginlegend">Login</legend>
+				<?php $registrationView->validateLoginData(); ?>
+					<div class="threecol">
+						<form method="post" action="login.php" id="login_form">
+							<div class="row loginrow">
+								<p><label class="loginbox" for="Username">Student ID:</label><input class="text" type="text" name="Username" /></p>
+							</div>
+							<div class="row loginrow">
+								<p><label class="loginbox" for="Password">Password:</label><input class="text" type="password" name="Password" /></p>
+							</div>
+							<div class="row loginrow">
+								<div class="threecol">
+									<a href="lostPassword.php" class="loginbox">Forgot your password?</a> <br />
+									<a href="registration.php" class="loginbox">Register</a>
+								</div>
+								<div class="twocol last">
+									<input class="submit" type="submit" value="SUBMIT" name="Login"/>
+								</div>
+							</div>
+						</form>
+					</div>
+			</fieldset>
 		</div>
 	</div>
 </div>
