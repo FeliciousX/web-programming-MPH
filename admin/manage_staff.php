@@ -17,11 +17,11 @@ $manageStaffView = new ManageStaffView();
 
     <h2>List of Admins</h2>
       	<?php
-      	if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
-      		$manageAdminView->upgradeStaff();
-      		$manageAdminView->downgradeStaff();
-      		$manageAdminView->removeStaff();
-      	}
+      	//if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
+      		$manageStaffView->upgradeStaff();
+      		$manageStaffView->downgradeStaff();
+      		$manageStaffView->removeStaff();
+      	//}
 
       	$manageStaffView->showAllStaff();
       	?>

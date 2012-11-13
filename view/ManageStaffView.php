@@ -1,13 +1,13 @@
 <?php
 
 require_once('../inc/config.php');
-//require_once('../controller/SessionManager.php');
+require_once('../controller/SessionManager.php');
 require_once('../controller/staffcontroller.php');
 require_once('../model/staffModel.php');
 
 class ManageStaffView{
 
-   /* public function validateSession() {
+    public function validateSession() {
         $sessionManager = new SessionManager();
         
         if ($sessionManager->authenticateReservationSession()) {
@@ -19,7 +19,7 @@ class ManageStaffView{
             header('Location: ../index.php');
             exit;
         }
-    }*/
+    }
 
 	public function upgradeStaff(){
 		if(isset($_POST['upgrade'])){
@@ -67,9 +67,9 @@ class ManageStaffView{
                 echo '<table>';
                 echo '<thead>';
                 if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
-                    echo '<tr><th>ID</th><th>Name</th><th>Status</th><th>Upgrade/Downgrade</th><th>Delete</th></tr>';
+                    echo '<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Status</th><th>Upgrade/Downgrade</th><th>Delete</th></tr>';
                 } else {
-                    echo '<tr><th>ID</th><th>Name</th><th>Status</th></tr>';
+                    echo '<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Status</th></tr>';
                 }
                 echo '</thead>';
                 echo '<tbody>';
@@ -81,7 +81,9 @@ class ManageStaffView{
                     } else {
                         echo '<td>' . $result[$i]['StaffID'] . '</td>';
                     }
-                    echo '<td>' . $result[$i]['StaffName'] . '</td>';
+                    
+                    echo '<td>' . $result[$i]['StaffFirstName'] . '</td>';
+                    echo '<td>' . $result[$i]['StaffLastName'] . '</td>';
                     echo '<td>' . (($result[$i]['SuperAdmin'] == 0) ? 'Admin' : 'Super Admin') . '</td>';
                     if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
                         echo '<td><input type="submit"' . (($result[$i]['SuperAdmin'] == 0) ? ' name="upgrade" value="Upgrade"' : ' name="downgrade" value="Downgrade"') . ' /></td>';
