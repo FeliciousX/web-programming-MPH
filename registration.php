@@ -63,7 +63,7 @@ $registrationView->validateSession();
                             <div class="row registration">
                                 <div class="fourcol">
                                     <label for="Username">Username
-                                        <span>Student ID</span>
+                                        <span>User ID</span>
                                     </label>
                                 </div>
                                 <div class="fourcol last">
@@ -93,7 +93,7 @@ $registrationView->validateSession();
                             <div class="row registration">
                                 <div class="fourcol">
                                     <label for="Password">Password
-                                        <span>Minimum 8 characters</span>
+                                        <span>Minimum 6 characters</span>
                                     </label>
                                 </div>
                                 <div class="fourcol last">
