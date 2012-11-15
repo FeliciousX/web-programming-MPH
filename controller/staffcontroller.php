@@ -239,7 +239,7 @@ public function register($staffID, $firstName, $lastName, $password, $repeatPass
             }
 
             $staffModel = new StaffModel();
-            $result = $staffModel->insertAdmin($staffID, $firstname,$lastname,$password,$activationCode,1,1);
+            $result = $staffModel->insertStaff($staffID, $firstname,$lastname,$password,$activationCode,1,1);
 
             if (!$result) {
                 throw new Exception('Staff ID already exist.');

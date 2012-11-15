@@ -2,8 +2,10 @@
 session_start();
 
 require_once('../inc/config.php');
-require_once('../controller/StaffController.php');
-require_once('../model/StaffModel.php');
+require_once('../controller/staffcontroller.php');
+require_once('../model/staffmodel.php');
+require_once('../controller/studentcontroller.php');
+require_once('../model/studentmodel.php');
 require_once('../securimage/securimage.php');
 
 /**
@@ -33,7 +35,7 @@ function registerAdmin() {
             $staffController = new StaffController();
             $staffController->addAdmin($staffID, $password, $repeatPassword, $firstname,$lastname);
 
-            $adminController->promoteToSuperAdmin($staffID);
+            $staffController->promoteToSuperAdmin($staffID);
             header('Location: ../index.php');
         } catch (Exception $e) {
             echo '<p class="error_message">' . $e->getMessage() . '</p>';
