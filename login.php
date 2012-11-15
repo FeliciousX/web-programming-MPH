@@ -32,7 +32,7 @@
 					<div class="threecol">
 						<form method="post" action="login.php" id="login_form">
 							<div class="row loginrow">
-								<p><label class="loginbox" for="Username">Student ID:</label><input class="text" type="text" name="Username" /></p>
+								<p><label class="loginbox" for="Username">User ID:</label><input class="text" type="text" name="Username" /></p>
 							</div>
 							<div class="row loginrow">
 								<p><label class="loginbox" for="Password">Password:</label><input class="text" type="password" name="Password" /></p>

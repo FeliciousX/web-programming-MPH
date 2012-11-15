@@ -32,9 +32,17 @@
 		height:35px;
 		margin-top: 5%;
 		clear:both;
-		border: 2px solid #3869A3;
 		border-radius: 8px;
-		background: #529AF0;
+		background:transparent url('../img/a_bg.gif') repeat-x left top;
+		background-position:left top;
+	}
+
+	input.button {
+		padding: 5px 10px 5px 10px;
+		color: #FFF;
+		border-radius: 8px;
+		background:transparent url('../img/a_bg.gif') repeat-x left top;
+		background-position:left top;
 	}
 
 	table {
@@ -78,6 +86,15 @@
 		margin-bottom: 10px;
 	}
 
+	.schedule {
+		max-width: 845px;
+		border: 1px solid #BBB;
+		padding: 10px;
+		position: relative;
+		background: #E9E9E9;
+		margin: auto;
+	}
+
 	.heading {
 		background-color:#4DB2FA;
 		color:white;
@@ -98,8 +115,6 @@
 	}
 
 	.loginlegend {
-		background-color:#DB6239; 
-		color:white;
 		font-variant: small-caps;
 	}
 	.loginbox { 

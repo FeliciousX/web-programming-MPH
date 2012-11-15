@@ -20,8 +20,10 @@
 <div class="container">
 	<div class="row selection">
 		<div class="twelvecol last centerObjects">
+			<fieldset>
+				<legend>Sports Type</legend>
 			<form name="sportsForm" action="testlayout.php" method="post">
-			<p>Sports type: &nbsp;
+			<p>
 			<select name="sportsType">
 			    <option value="Basketball">Basketball</option>
 			    <option value="Badminton">Badminton</option>
@@ -29,9 +31,10 @@
 			    <option value="Squash">Squash</option>
 			    <option value="Multistorey Carpark">Multistorey Carpark (Futsal & Tennis)</option>
 			</select>
-			<input type="submit" value="Submit" />
+			<input type="submit" value="Submit" class="button" />
 			</p>
 			</form>
+			</fieldset>
 		</div>
 	</div>
 </div>
@@ -39,6 +42,8 @@
 <div class="container">
 	<div class="row">
 		<div class="twelvecol last">
+			<fieldset class="schedule">
+				<legend class="centerObjects">Schedule of the Week</legend>
 			<?php
 				echo '<table name="bookingSchedule">';
 				date_default_timezone_set('Asia/Kuching');
@@ -91,6 +96,7 @@
 				echo '</tr>';
 				echo '</table>';
 			?>
+			</fieldset>
 		</div>
 	</div>
 </div>

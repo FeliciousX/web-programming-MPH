@@ -131,8 +131,8 @@ $registrationView->validateSession();
                                 </div>
                             </div>
                             <div class="row centerObjects">
-                                <input type="submit" name="Register" value="Proceed" />
-                                <input type="reset" name="Clear" value="Clear" />
+                                <input type="submit" name="Register" value="Proceed" class="button" />
+                                <input type="reset" name="Clear" value="Clear" class="button" />
                             </div>
                         </fieldset>
                     </form>
