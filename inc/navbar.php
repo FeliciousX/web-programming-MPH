@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('view/LoginView.php');
 ?>
 <!DOCTYPE html>
@@ -30,11 +29,11 @@ require_once('view/LoginView.php');
 				<div class="threecol">
 					<a href="aboutus.php" class="navbar">About Us</a>
 				</div>
-				<div class="threecol">
-					<a href="registration.php" class="navbar">Register</a>
-				</div>
+				<div class="threecol">'; 
+					$loginView->validatePrivilegeButton(); 
+	echo '		</div>
 				<div class="threecol last">';
-					$loginView->validateSession();
+					$loginView->validateLoginButton();
 	echo '		</div>
 			</div>
 		</div>

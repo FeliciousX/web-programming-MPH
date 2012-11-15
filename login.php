@@ -1,7 +1,9 @@
 <?php
+	session_start();
 	require_once('view/RegistrationView.php');
 	require_once('/inc/config.php');
 	$registrationView = new RegistrationView();
+	$registrationView->validateSession();
 ?>
 <!DOCTYPE html>
 <html lang="en">
