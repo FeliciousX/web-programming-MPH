@@ -1,6 +1,6 @@
 <?php
 	require_once('view/RegistrationView.php');
-
+	require_once('/inc/config.php');
 	$registrationView = new RegistrationView();
 ?>
 <!DOCTYPE html>

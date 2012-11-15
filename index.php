@@ -22,7 +22,7 @@
 		<div class="twelvecol last centerObjects">
 			<fieldset>
 				<legend>Sports Type</legend>
-			<form name="sportsForm" action="testlayout.php" method="post">
+			<form name="sportsForm" action="index.php" method="post">
 			<p>
 			<select name="sportsType">
 			    <option value="Basketball">Basketball</option>
