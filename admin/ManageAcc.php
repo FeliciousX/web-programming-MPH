@@ -14,14 +14,14 @@
  <body>
  	<h2>Manage Students</h2>
  	<h2>Search</h2>
- 	 	<form action="MangageAcc.php" method="post">
+ 	 	<form action="ManageAcc.php" method="post">
       		 <fieldset class="form">
 	             <label class="form">Search:</label>
 	             <input type="text" name="searchItem" />
 	             <select name="type">
-	            	<option value="studentID" selected="selected">Student ID</option>
-	              	<option value="studentFirstName">Firs tName</option>
-	              	<option value="studentLastName">Last Name</option>
+	            	<option value="StudentID" selected="selected">Student ID</option>
+	              	<option value="StudentFirstName">First Name</option>
+	              	<option value="StudentLastName">Last Name</option>
 	              </select>
 	              <input class="form" type="submit" name="showAll" value="Show All" />
 	               <input class="form" type="submit" name="search" value="Search" />

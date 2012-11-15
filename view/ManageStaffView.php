@@ -49,7 +49,7 @@ class ManageStaffView{
         if (isset($_POST['delete'])) {
             try {
                 $staffController = new StaffController();
-                $staffController->removeAdmin($_POST['staffID']);
+                $staffController->removeStaff($_POST['staffID']);
 
                 echo '<p class="success_message">Admin has been removed.</p>';
             } catch (Exception $e) {
@@ -76,12 +76,11 @@ class ManageStaffView{
                 for ($i = 0; $i < sizeof($result); $i++) {
                     echo '<tr>';
                     if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
-                        echo '<form action="manage_admin.php" method="post">';
+                        echo '<form action="manage_staff.php" method="post">';
                         echo '<td><input type="text" value="' . $result[$i]['StaffID'] . '" readonly="readonly" name="staffID" /></td>';
                     } else {
                         echo '<td>' . $result[$i]['StaffID'] . '</td>';
                     }
-                    
                     echo '<td>' . $result[$i]['StaffFirstName'] . '</td>';
                     echo '<td>' . $result[$i]['StaffLastName'] . '</td>';
                     echo '<td>' . (($result[$i]['SuperAdmin'] == 0) ? 'Admin' : 'Super Admin') . '</td>';

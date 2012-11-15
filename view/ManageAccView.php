@@ -13,18 +13,21 @@ class ManageAccView{
 				$sResult = array();
 
 				if(strcmp($_POST['type'],'StudentID')==0){
-					$sResult = $userController -> getAllStudentByID($_POST['searchItem']);	
+					$sResult = $studentController -> getAllStudentByID($_POST['searchItem']);	
 				}
 				elseif(strcmp($_POST['type'],'StudentFirstName')==0){
-					$sResult = $userController->getByFirstName($_POST['searchItem']);
+					$sResult = $studentController->getAllStudentByFirstName($_POST['searchItem']);
 				}
+                elseif(strcmp($_POST['type'],'StudentLastName')==0){
+                    $sResult = $studentController->getAllStudentByLastName($_POST['searchItem']);
+                }
 				else{
 					throw new Exception('Invalid search criteria');
 				}
 
 				if(sizeof($sResult)> 0){
 					echo'<table>';
-					echo'<thead><tr><th>Student ID</th>First Name</th><th>Last Name</th><th>Account Status</th><th></th><th></th></tr></thead>';
+					echo'<thead><tr><th>Student ID</th><th>First Name</th><th>Last Name</th><th>Account Status</th><th></th><th></th></tr></thead>';
 					echo'<tbody>';
 					for($i = 0;$i<sizeof($sResult);$i++){
 					echo'<tr>';
@@ -33,7 +36,7 @@ class ManageAccView{
                     echo '<td>' . $sResult[$i]['StudentFirstName'] . '</td>';
                     echo '<td>' . $sResult[$i]['StudentLastName'] . '</td>';
                     echo '<td' . ($sResult[$i]['ActivationStatus'] == 1 ? ' class="success_message">Activated' : ' class="error_message">Not Activated') . '</td>';
-                    echo '<td><input onclick="confirmDialog();" type="submit" value="' . ($searchResult[$i]['ActivationStatus'] == 1 ? 'Deactivate" name="deactivate"' : 'Activate" name="activate"') . ' /></td>';
+                    echo '<td><input onclick="confirmDialog();" type="submit" value="' . ($sResult[$i]['ActivationStatus'] == 1 ? 'Deactivate" name="deactivate"' : 'Activate" name="activate"') . ' /></td>';
                     echo '<td><input onclick="confirmDialog();" type="submit" name="delete" value="Remove" /></td>';
                     echo '</form>';
                     echo '</tr>';
@@ -61,7 +64,7 @@ class ManageAccView{
             echo '<tbody>';
             for ($i = 0; $i < sizeof($sList); $i++) {
                 echo '<tr>';
-                echo '<form action="manage_account.php" method="post">';
+                echo '<form action="ManageAcc.php" method="post">';
                 echo '<td><input type="text" value="' . $sList[$i]['StudentID'] . '" name="studentID" readonly="readonly" /></td>';
                 echo '<td>' . $sList[$i]['StudentFirstName'] . '</td>';
                 echo '<td>' . $sList[$i]['StudentLastName'] . '</td>';
@@ -79,10 +82,10 @@ class ManageAccView{
     }
 		
     public function activate(){
-    	if(isset($_POST['active'])){
+    	if(isset($_POST['activate'])){
     		try{
     			$studentController = new StudentController();
-    			$studentController->activerStudent($_POST['studentID']);
+    			$studentController->activateUser($_POST['studentID']);
 
     			echo'<p class ="success_message">Account actived.</p>';
 

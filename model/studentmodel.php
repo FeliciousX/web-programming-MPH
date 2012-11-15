@@ -149,7 +149,7 @@ class StudentModel {
         $queryStr = "SELECT * FROM $this->TABLE_STUDENT WHERE $this->COLUMN_STUDENT_FIRST_NAME LIKE '%$studentFirstName%'";
         $result = $studentTable->query($queryStr);
 
-        if ($StudentTable->affected_rows > 0) {
+        if ($studentTable->affected_rows > 0) {
             for ($i = 0; $i < $result->num_rows; $i++) {
                  $row = $result->fetch_assoc();
                $studentList[$i][$this->COLUMN_STUDENTID] = $row[$this->COLUMN_STUDENTID];

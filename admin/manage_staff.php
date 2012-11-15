@@ -1,8 +1,9 @@
 <?php
-
+session_start();
 require_once('../view/ManageStaffView.php');
+
 $manageStaffView = new ManageStaffView();
-//$manageStaffView-> validateSession();
+$manageStaffView-> validateSession();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -17,11 +18,11 @@ $manageStaffView = new ManageStaffView();
 
     <h2>List of Admins</h2>
       	<?php
-      	//if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
+      	if (isset($_SESSION['SuperAdmin']) && $_SESSION['SuperAdmin']) {
       		$manageStaffView->upgradeStaff();
       		$manageStaffView->downgradeStaff();
       		$manageStaffView->removeStaff();
-      	//}
+      	}
 
       	$manageStaffView->showAllStaff();
       	?>
