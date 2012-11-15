@@ -25,13 +25,13 @@ require_once('view/LoginView.php');
 		<div class="row">
 			<div class="twelvecol last navbar">
 				<div class="threecol">
-					<a href="btn1.html" class="navbar">Button 1</a>
+					<a href="index.php" class="navbar">Home</a>
 				</div>
 				<div class="threecol">
-					<a href="btn2.html" class="navbar">Button 2</a>
+					<a href="aboutus.php" class="navbar">About Us</a>
 				</div>
 				<div class="threecol">
-					<a href="btn3.html" class="navbar">Button 3</a>
+					<a href="registration.php" class="navbar">Register</a>
 				</div>
 				<div class="threecol last">';
 					$loginView->validateSession();
