@@ -55,20 +55,7 @@ class DBInstaller {
         return $result;
     }
 
-    private function setupUserTable() {
-        $result = FALSE;
 
-        try {
-            $userModel = new UserModel();
-
-            $result = $userModel->createUserTable();
-            echo "User Table: " . (($result) ? 'Successful' : 'Unsuccessful') . '</p>';
-        } catch (Exception $e) {
-            throw $e;
-        }
-
-        return $result;
-    }
 
     public function setupDB() {
         $numOfTable = 0;

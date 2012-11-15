@@ -204,6 +204,51 @@ public function register($staffID, $firstName, $lastName, $password, $repeatPass
         }
     }
 
+     public function addAdmin($staffID, $password, $repeatPassword, $firstname,$lastname) {
+        try {
+            $staffID = stripslashes($staffID);
+            $password = stripslashes($password);
+            $repeatPassword = stripslashes($repeatPassword);
+            $firstname = stripslashes($firstname);
+            $lastname = stripslashes($lastname);
+
+            if (empty($staffID) || empty($password) || empty($repeatPassword) || empty($firstname) || empty($lastname)) {
+                throw new Exception('All fields are required.');
+            }
+
+            if (is_numeric($firstname)) {
+                throw new Exception('First Name must not be numeric.');
+            }
+
+             if (is_numeric($lastname)) {
+                throw new Exception('Last Name must not be numeric.');
+            }
+
+            if (strcmp($password, $repeatPassword) != 0) {
+                throw new Exception('Both password fileds must be the same.');
+            }
+
+             mt_srand(time());
+            $activationCode = substr(md5(mt_rand(0, mt_getrandmax())), 0, 4);
+
+            $studentController = new StudentController();
+            $student = $studentController->getStudent($staffID);
+
+              if (sizeof($student) != 0) {
+                throw new Exception('Invalid Staff ID.');
+            }
+
+            $staffModel = new StaffModel();
+            $result = $staffModel->insertAdmin($staffID, $firstname,$lastname,$password,$activationCode,1,1);
+
+            if (!$result) {
+                throw new Exception('Staff ID already exist.');
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function activate($staffID, $activationCode) {
         try {
             $staffID = stripslashes($staffID);
