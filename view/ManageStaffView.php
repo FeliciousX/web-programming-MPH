@@ -26,7 +26,7 @@ class ManageStaffView{
 			try{
 				$staffController = new StaffController();
 				$staffController ->promoteToSuperAdmin($_POST['staffID']);
-				echo '<p class="success_message">' . $_POST['staffID'] . ' has been upgraded to Admin status.</p>';
+				echo '<p class="success_message">' . $_POST['staffID'] . ' has been upgraded to Super Admin status.</p>';
 			}
 			catch(Exception $e){
 				echo'<p class = "error_message">'.$e->getMessage().'</p>';

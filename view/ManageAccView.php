@@ -2,9 +2,24 @@
 
 require_once('../inc/config.php');
 require_once('../controller/studentcontroller.php');
+require_once('../controller/SessionManager.php');
 require_once('../model/studentmodel.php');
 
 class ManageAccView{
+
+     public function validateSession() {
+        $sessionManager = new SessionManager();
+        
+        if ($sessionManager->authenticateReservationSession()) {
+            header('Location: ../reservation');
+            exit;
+        }
+
+        if (!$sessionManager->authenticateSession() || !$sessionManager->authenticateAdminSession()) {
+            header('Location: ../index.php');
+            exit;
+        }
+    }
 
 	public function search(){
 		if(isset($_POST['search'])){
