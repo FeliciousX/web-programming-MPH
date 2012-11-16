@@ -1,9 +1,9 @@
 <?php
 
-require_once('../inc/config.php');
-require_once('../controller/SessionManager.php');
-require_once('../controller/staffcontroller.php');
-require_once('../model/staffModel.php');
+require_once('inc/config.php');
+require_once('controller/SessionManager.php');
+require_once('controller/staffcontroller.php');
+require_once('model/staffModel.php');
 
 class ManageStaffView{
 
