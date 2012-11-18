@@ -124,7 +124,7 @@ class StaffController {
         }
     }
 
-    public function changePassword($staffID, $password) 
+   /** public function changePassword($staffID, $password) 
     {
         $result = FALSE;
 
@@ -140,8 +140,64 @@ class StaffController {
         }
 
         return $result;
+    }**/
+
+    
+ public function changePassword($currentPassword, $newPassword, $repeatNewPassword, $staffID) {
+        $result = FALSE;
+
+        try {
+            $currentPassword = stripslashes($currentPassword);
+            $newPassword = stripcslashes($newPassword);
+            $repeatNewPassword = stripslashes($repeatNewPassword);
+
+            if (empty($currentPassword) || empty($newPassword) || empty($repeatNewPassword)) {
+                throw new Exception('All fields are required.');
+            }
+
+            if (strcmp($newPassword, $repeatNewPassword) != 0) {
+                throw new Exception('Both the new password fields must have the same value.');
+            }
+
+       
+
+            $staffModel = new StaffModel();
+            $result = $staffModel->updateStaffPassword($staffID, $newPassword);
+
+            if ($result) {
+                mail($staffID . '@swinburne.edu.my', 'Password Change', 'Your new password: ' . $newPassword . "\nIf you do not change your password, please contact the administrator immediately.");
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+        return $result;
     }
 
+    public function resetPassword($staffID) {
+        try {
+            $staffID = stripslashes($staffID);
+
+            if (empty($staffID)) {
+                throw new Exception('Staff ID is required.');
+            }
+
+            mt_srand(time());
+            $password = substr(md5(mt_rand(0, mt_getrandmax())), 0, 4);
+
+            $staffModel = new StaffModel();
+            $result = $staffModel->updateStudentPassword($staffID, $password);
+
+            if ($result) {
+                $header = 'From: noreply@mph.swinburne.edu.my';
+                mail($staffID . '@swinburne.edu.my', 'Password Reset', 'Your new password: ' . $password . "\nIf you do not reset your password, please contact the administrator immediately.", $header);
+            } else {
+                throw new Exception('Invalid Staff ID.');
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
 public function register($staffID, $firstName, $lastName, $password, $repeatPassword, $captcha) {
         try {

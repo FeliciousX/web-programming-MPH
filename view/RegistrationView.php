@@ -107,14 +107,18 @@ class RegistrationView {
                     }
                     elseif($superAdminStatus  == 0)
                     {
-                         if (sizeof($validstaff) == 1 & $validstaff['ActivationStatus'] == 1) 
+                       
+                        $so = sizeof($validstaff);
+                        
+                            
+                         if ($validstaff['ActivationStatus'] == 1) 
                         {
 
                         $sessionManager->startSession($name, 0, $username, 0);
                         header('Location: user/index.php');
                         exit;
                         }
-                        else
+                        elseif($validstaff['ActivationStatus'] == 0)
                         {
                             throw new Exception('<a href="activate.php">Please activate you account first.<br />Click here to activate your account.</a>');
                         }

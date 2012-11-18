@@ -119,6 +119,8 @@ class StudentController {
                 throw new Exception('Both the new password fields must have the same value.');
             }
 
+         
+
             $studentModel = new StudentModel();
             $result = $studentModel->updateStudentPassword($studentID, $newPassword);
 
