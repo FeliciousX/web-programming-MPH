@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	require_once('view/IndexView.php');
+	$indexView = new IndexView();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,58 +49,7 @@
 		<div class="twelvecol last">
 			<fieldset class="schedule">
 				<legend class="centerObjects">Schedule of the Week</legend>
-			<?php
-				echo '<table name="bookingSchedule">';
-				date_default_timezone_set('Asia/Kuching');
-
-				// Display the days
-        	    $today = getdate(date('U'));
-        	    $daysOfWeek = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-        	    $day = $today['weekday'];
-
-        	    echo '<tr> <td></td> <td>' . $day . '</td>';
-
-        	    for($i = 0; $i < 7; $i++) 
-        	    {
-        	    	if($day == $daysOfWeek[$i]) {
-        	    		if($i+1 == 7)
-        	    		{
-        	    			$i=-1;
-        	    		}
-        	    		$day = $daysOfWeek[$i+1];
-        	    		if($day == $today['weekday'])
-        	    		{
-        	    			break;
-        	    		}
-        	    		else
-        	    		{
-        	    			echo '<td>' . $day . '</td>';
-        	    		}
-        	    	}
-        	    }
-				echo '</tr>';
-
-				// Display the time range
-				$startTimeHour = 9;
-				$startTimeMinutes = 0;
-				$endTimeHour = 23;
-				$endTimeMinutes = 0;
-				$timeHour = $startTimeHour;
-				$timeMinutes = $startTimeMinutes;
-				do {
-					echo '<tr>';
-					echo '<td>' . $timeHour . $timeMinutes . 0 . '</td>';
-					$timeMinutes += 3;
-					if($timeMinutes == 6)
-					{
-						$timeHour++;
-						$timeMinutes = 0;
-					}
-				} while ($timeHour . $timeMinutes <= $endTimeHour . $endTimeMinutes);
-
-				echo '</tr>';
-				echo '</table>';
-			?>
+				<?php $indexView->displayTable(); ?>
 			</fieldset>
 		</div>
 	</div>

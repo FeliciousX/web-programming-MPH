@@ -16,7 +16,7 @@ class BookingController
 			$bookingModel = new BookingModel();
 
 			if (empty($bookerID) || empty($bookingDate) || empty($bookingStartTime) || empty($bookingEndTime) || empty($sport) || empty($courtID) ) {
-				throw new Exception("All field are required.");
+				throw new Exception("All fields are required.");
 			}
 
 			$result = $bookingModel->insertBooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport, $courtID);
@@ -40,7 +40,7 @@ class BookingController
 			$bookingModel = new BookingModel();
 
 			if (empty($bookerID) || empty($bookingDate) || empty($bookingStartTime) || empty($bookingEndTime) || empty($sport) || empty($courtID) ) {
-				throw new Exception("All field are required.");
+				throw new Exception("All fields are required.");
 			}
 
 			$result = $bookingModel->selectABooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport, $courtID);
