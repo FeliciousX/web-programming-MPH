@@ -10,7 +10,7 @@ class LoginView {
         
         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
             if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
-                echo '<a href="admin/manage_staff.php">Manage Accounts</a>';
+                echo '<a href="manage_staff.php">Manage Accounts</a>';
             } else {
                 echo '<a href="user_profile.php">View Profile</a>';
             }
