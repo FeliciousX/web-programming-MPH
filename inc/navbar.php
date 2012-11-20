@@ -22,12 +22,12 @@ require_once('view/LoginView.php');
 	echo '
 	<div class="container navcontainer">
 		<div class="row">
-			<div class="twelvecol last navbar">
-				<div class="threecol">
-					<a href="index.php" class="navbar">Home</a>
+			<div class="twelvecol last navbar" style="height:30px">
+				<div class="threecol topmargin3px">
+					<a href="index.php" class="button" style="height:27px; padding-top:4px;">Home</a>
 				</div>
-				<div class="threecol">
-					<a href="aboutus.php" class="navbar">About Us</a>
+				<div class="threecol topmargin3px">
+					<a href="aboutus.php" class="button" style="height:27px; padding-top:4px;">About Us</a>
 				</div>
 				<div class="threecol">'; 
 					$loginView->validatePrivilegeButton(); 

@@ -1,41 +1,47 @@
+<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/animatedcollapse.js"></script>
+<script type="text/javascript" src="js/collapsible.js"></script>
+
 <?php
-
-require_once('controller/SessionManager.php');
-
 
 class LoginView {
 
     public function validatePrivilegeButton() {
-        $sessionManager = new SessionManager();
         
         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
             if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
-                echo '<a href="manage_staff.php">Manage Accounts</a>';
+                echo '  <p class="topmargin3px"><a class="btnManage" href="javascript:animatedcollapse.toggle(\'isaac\')" style="text-decoration:none;">Manage Accounts</a></p>
+                        <div class="threecol"></div>
+                        <div class="threecol"></div>
+                          <div class="twelvecol" id="isaac" style="display:none; max-height:30px;">   
+                              <p style="position:absolute; z-index:50;"><a href="manage_staff.php" class="button topmargin5px">Manage Admins</a> <a href="manage_acc.php" class="button topmargin5px">Manage Users</a></p>
+                          </div>
+                        ';
             } else {
-                echo '<a href="user_profile.php">View Profile</a>';
+                echo '<a href="user_profile.php" class="button" style="height:27px; padding-top:4px;">View Profile</a>';
             }
         }
         else
         {
-            echo '<a href="registration.php" class="navbar">Register</a>';
+            echo '<a href="registration.php" class="button" style="height:27px; padding-top:4px;">Register</a>';
         }
     }
 
 	public function validateLoginButton() {
-        $sessionManager = new SessionManager();
         
         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
             if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
-                echo '<a href="logout.php">Admin ' . $_SESSION['ID'] . ': Logout</a>';
+                echo '<a href="logout.php" class="navbutton">Admin ' . $_SESSION['ID'] . ' - Logout</a>';
             } else {
-                echo '<a href="logout.php">ID ' . $_SESSION['ID'] . ': Logout</a>';
+                echo '<a href="logout.php" class="navbutton">ID ' . $_SESSION['ID'] . ' - Logout</a>';
             }
         }
         else
         {
-        	echo '<a href="login.php" class="navbar">Login</a>';
+        	echo '<a href="login.php" class="button" style="height:27px; padding-top:4px;">Login</a>';
         }
     }
 
-
 }
+?>

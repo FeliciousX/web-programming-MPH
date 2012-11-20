@@ -1,9 +1,9 @@
 <?php
 
-require_once('../inc/config.php');
-require_once('../controller/studentcontroller.php');
-require_once('../controller/SessionManager.php');
-require_once('../model/studentmodel.php');
+require_once('inc/config.php');
+require_once('controller/studentcontroller.php');
+require_once('controller/SessionManager.php');
+require_once('model/studentmodel.php');
 
 class ManageAccView{
 

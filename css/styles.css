@@ -33,16 +33,72 @@
 		margin-top: 5%;
 		clear:both;
 		border-radius: 8px;
-		background:transparent url('../img/a_bg.gif') repeat-x left top;
+		background: #d11717;
 		background-position:left top;
+
+		/*Rounded Corners*/
+ 		-webkit-border-radius: 10px;
+ 		-moz-border-radius: 10px;
+ 		border-radius: 10px;
+
+ 		 /*Gradient*/
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+
+ 		/*Shadow*/
+ 		-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+ 		-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+ 		box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+
+ 		/*Transition*/
+		-webkit-transition: All 0.5s ease;
+		-moz-transition: All 0.5s ease;
+		-o-transition: All 0.5s ease;
+		-ms-transition: All 0.5s ease;
+		transition: All 0.5s ease;
 	}
 
-	input.button {
+	.button {
 		padding: 5px 10px 5px 10px;
 		color: #FFF;
 		border-radius: 8px;
-		background:transparent url('../img/a_bg.gif') repeat-x left top;
+		background: #d11717;
 		background-position:left top;
+
+		/*Rounded Corners*/
+ 		-webkit-border-radius: 10px;
+ 		-moz-border-radius: 10px;
+ 		border-radius: 10px;
+
+ 		/*Shadow*/
+ 		-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+ 		-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+ 		box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+
+ 		/*Gradient*/
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+
+ 		/*Transition*/
+		-webkit-transition: All 0.5s ease;
+		-moz-transition: All 0.5s ease;
+		-o-transition: All 0.5s ease;
+		-ms-transition: All 0.5s ease;
+		transition: All 0.5s ease;
+	}
+
+	.submit:hover {
+		background-color: #ff3434;
+	}
+
+ 	.button:hover {
+		background-color: #ff3434;
 	}
 
 	table {
@@ -86,6 +142,94 @@
 		margin-bottom: 10px;
 	}
 
+	.btnAvailable {
+		width:80px;
+		padding: 5px 10px 5px 10px;
+		color: #FFF;
+		background:transparent url('../img/available.gif') repeat-x left top;
+		background-position:left top;
+
+		/*Rounded Corners*/
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		 
+		/*Shadow*/
+		-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		
+		/*Transition*/
+		-webkit-transition: All 0.8s ease;
+		-moz-transition: All 0.8s ease;
+		-o-transition: All 0.8s ease;
+		-ms-transition: All 0.8s ease;
+		transition: All 0.8s ease;
+
+	}
+
+	.btnAvailable:hover {
+		background-position: 0 150px;
+		background-color:green;
+	}
+
+	.btnUnavailable {
+		width:80px;
+		padding: 5px 10px 5px 10px;
+		color: #FFF;
+		background:transparent url('../img/unavailable.gif') repeat-x left top;
+		background-position:left top;
+
+		/*Rounded Corners*/
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		 
+		/*Shadow*/
+		-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+	}
+
+	.btnManage {
+		width:80px;
+		padding: 5px 10px 5px 10px;
+		color: #FFF;
+		margin-bottom: 10px;
+		background:transparent url('../img/a_bg.gif') repeat-x left top;
+		background-position:left top;
+
+		/*Rounded Corners*/
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		 
+		/*Shadow*/
+		-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+		
+		/*Transition*/
+		-webkit-transition: All 0.5s ease-in-out;
+		-moz-transition: All 0.5s ease-in-out;
+		-o-transition: All 0.8s ease-in-out;
+		-ms-transition: All 0.8s ease-in-out;
+		transition: All 0.8s ease-in-out;
+
+		-webkit-opacity: 0.5;
+  		-moz-opacity: 0.5;
+  		opacity: 0.5;
+
+	}
+
+	.btnManage:hover {
+		background-position: 0 150px;
+		background-color:black;
+		-webkit-opacity: 1;
+  		-moz-opacity: 1;
+  		opacity: 1;
+	}
+
 	.schedule {
 		max-width: 845px;
 		border: 1px solid #BBB;
@@ -105,9 +249,46 @@
 	.navbar { 
 		background-color: #DE4C3C; 
 		border: 2px double white;
+		padding-top: 5px;
 		margin-top: 4px;
 		margin-bottom: 4px;
 		text-align: center;
+	}
+
+	.navbutton {
+		background: #d11717;
+		border: 2px solid #eee;
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-bottom: 2px;
+		height: 25px;
+		width: 101px;
+		line-height: 145%;
+		overflow: hidden;
+		display: block;
+
+		/*Rounded Corners*/
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		 
+		/*Gradient*/
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+
+		/*Transition*/
+		-webkit-transition: All 0.5s ease;
+		-moz-transition: All 0.5s ease;
+		-o-transition: All 0.5s ease;
+		-ms-transition: All 0.5s ease;
+		transition: All 0.5s ease;
+	}
+
+	.navbutton:hover {
+  		width: 200px;
 	}
 
 	.navcontainer {
@@ -143,6 +324,7 @@
 	a:hover { color:#C9F0FF; }
 
 	.row .topmargin5px{ margin-top:5px; }
+	.topmargin3px { margin-top:3px; }
 	.row .registration { 
 		margin-top:12px;
 		padding-bottom:6px;
@@ -163,6 +345,11 @@
 		display:block;
 		clear:both;
 	}
+
+	.grey { background-color: grey; }
+
+
+
 
 /* ============================= */
 /* ! Layout for mobile version   */
