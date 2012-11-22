@@ -1,13 +1,17 @@
 <?php
 require_once('controller/SessionManager.php');
+require_once('controller/SportsController.php');
+require_once('controller/BookingController.php');
 
 class IndexView {
 
-	public function displayTable() {
+	public function displayTable($sportsType) {
 		echo '<table name="bookingSchedule">';
 		date_default_timezone_set('Asia/Kuching');
 	
 		$sessionManager = new SessionManager();
+		$sportsController = new SportsController();
+		$bookingController = new BookingController();
 
 		// Display the days
 	    $today = getdate(date('U'));
@@ -50,9 +54,9 @@ class IndexView {
 		echo '</tr>';
 	
 		// Display the time range
-		$endTimeHour = 23;
+		$endTimeHour = 22;
 		$endTimeMinutes = 0;
-		$timeHour = 9;
+		$timeHour = 8;
 		$timeMinutes = 0;
 		do {
 			echo '<tr>';
@@ -101,20 +105,40 @@ class IndexView {
 						$dateYear++;
 					}
 
-					if ($timeHour . $timeMinutes . 0) {
-						echo '<td>
-								<form name="bookingForm" method="post" action="bookingpage.php">
-									<input name="dateday" type="hidden" value = "' . $dateDay . '"/> 
-									<input name="datemonth" type="hidden" value = "' . $dateMonth . '"/> 
-									<input name="dateyear" type="hidden" value = "' . $dateYear . '"/> 
-									<input name="timeinfo" type = "hidden" value = "' .  $timeHour . $timeMinutes . 0 . '" />
-									<input name="dayinfo" type = "hidden" value = "' .  $realWeek[$j] . '" />
-									<button class="btnAvailable" type="submit">Available</button>
-								</form>
-							 </td>';
+					$afterHour=$timeHour;
+					$afterMinutes=$timeMinutes+3;
+					if($afterMinutes == 6)
+					{
+						$afterHour=$timeHour + 1;
+						$afterMinutes = 0;
 					}
-					else if(!$timeHour) {
-						echo '<td><button class="btnUnavailable" type="submit">Booked</button></td>';
+					$fullDate = $dateYear . '-' . $dateMonth . '-' . $dateDay;
+					$fullTime = $timeHour . $timeMinutes . '0' . '00';
+					$fullAfter = $afterHour . $afterMinutes . '0' . '00';
+					$roomStatus = false;
+					$availability = false;
+					$sportsController->validateSportsType($sportsType, $realWeek[$j], $timeHour, $roomStatus, $availability, $fullDate, $fullTime, $fullAfter);
+					if ($availability) {
+						if ($roomStatus)
+						{
+							echo '<td>
+									<form name="bookingForm" method="post" action="bookingpage.php">
+										<input name="dateday" type="hidden" value = "' . $dateDay . '"/> 
+										<input name="datemonth" type="hidden" value = "' . $dateMonth . '"/> 
+										<input name="dateyear" type="hidden" value = "' . $dateYear . '"/> 
+										<input name="timeinfo" type = "hidden" value = "' .  $timeHour . $timeMinutes . 0 . '" />
+										<input name="dayinfo" type = "hidden" value = "' .  $realWeek[$j] . '" />
+										<input name="starthour" type="hidden" value="'. $timeHour . '"/>
+										<input name="startminutes" type="hidden" value="'. $timeMinutes . '"/>
+										<input name="sports" type="hidden" value="'. $sportsType . '"/>
+										<button class="btnAvailable" type="submit">Available</button>
+									</form>
+								 </td>';
+						}
+						else 
+						{
+							echo '<td><button class="btnUnavailable" type="submit">Booked</button></td>';
+						}
 					}
 					else {
 						echo '<td class=grey>Unavailable</td>';

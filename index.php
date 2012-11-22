@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	if(!isset($_GET['sportsType']))
+		header("Location:index.php?sportsType=Basketball");
 	require_once('view/IndexView.php');
 	$indexView = new IndexView();
 ?>
@@ -18,9 +20,34 @@
 	
 	<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
 	<script type="text/javascript" src="js/css3-mediaqueries.js"></script>
+	<script type="text/javascript">
+	function setSelections()
+	{
+	    document.sportsForm.sportsType.value = getQueryValue("sportsType");
+	};
+
+	function getQueryValue(key)
+	{
+	    var queryString = window.location.search.substring(1);
+	    var queryParams = queryString.split("&");
+	    for(var i = 0; i < queryParams.length; i++)
+	    {
+	    	if(queryParams[i].indexOf("=") > 0)
+	    	{
+	    		var keyValue = queryParams[i].split("=");
+	    		if(keyValue[0] == key)
+	    		{
+	    			return keyValue[1];
+	    		}
+	    	}
+	    }
+
+	    return null;
+	}
+	</script>
 </head>
 
-<body>
+<body onload="setSelections();">
 <?php include 'inc/header.php' ?>
 <?php include 'inc/navbar.php' ?>
 <div class="container">
@@ -28,14 +55,14 @@
 		<div class="twelvecol last centerObjects">
 			<fieldset>
 				<legend>Sports Type</legend>
-			<form name="sportsForm" action="index.php" method="post">
+			<form name="sportsForm" action="index.php" method="get">
 			<p>
-			<select name="sportsType">
+			<select id="sportsType" name="sportsType">
 			    <option value="Basketball">Basketball</option>
 			    <option value="Badminton">Badminton</option>
-			    <option value="Table Tennis">Table Tennis</option>
+			    <option value="TableTennis">Table Tennis</option>
 			    <option value="Squash">Squash</option>
-			    <option value="Multistorey Carpark">Multistorey Carpark (Futsal & Tennis)</option>
+			    <option value="MultistoreyCarpark">Multistorey Carpark</option>
 			</select>
 			<input type="submit" value="Submit" class="button" />
 			</p>
@@ -50,7 +77,11 @@
 		<div class="twelvecol last">
 			<fieldset class="schedule">
 				<legend class="centerObjects">Schedule of the Week</legend>
-				<?php $indexView->displayTable(); ?>
+				<?php 
+					if(!isset($_GET['sportsType']))
+						$_GET['sportsType'] = "Basketball";
+					$indexView->displayTable($_GET['sportsType']); 
+				?>
 			</fieldset>
 		</div>
 	</div>
