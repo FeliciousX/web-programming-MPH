@@ -7,6 +7,14 @@
 
 class LoginView {
 
+    public function validateShowBookingButton() {
+        if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
+                echo '<a class="button" href="showallbooking.php" style="height:27px; padding-top:4px;">Show All Booking</a>';
+            } else {
+                echo '<a href="aboutus.php" class="button" style="height:27px; padding-top:4px;">About Us</a>';
+            }
+    }
+
     public function validatePrivilegeButton() {
         
         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
@@ -19,7 +27,7 @@ class LoginView {
                           </div>
                         ';
             } else {
-                echo '<a href="user_profile.php" class="button" style="height:27px; padding-top:4px;">View Profile</a>';
+                echo '<a href="changepassword.php" class="button" style="height:27px; padding-top:4px;">Change Password</a>';
             }
         }
         else

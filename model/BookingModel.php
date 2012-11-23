@@ -56,7 +56,7 @@ class BookingModel {
 		return $result;
 	}
 
-	public function selectABooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport, $courtID)
+	public function selectABooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport)
 	{
 		$booking = null;
 		$config = new DBConfiguration();
@@ -67,9 +67,9 @@ class BookingModel {
 			throw new Exception("We are currently experiencing some heavy traffic. Please try again later.");
 		}
 
-		$queryStr = "SELECT b.$this->COLUMN_BOOKING_DATE, u.StudentFirstName, u.StudentLastName, b.$this->COLUMN_SPORT, b.$this->COLUMN_BOOKERID, b.$this->COLUMN_BOOKING_START_TIME, b.$this->COLUMN_BOOKING_END_TIME
-					FROM $this->TABLE_BOOKING b, Student u WHERE b.$this->COLUMN_BOOKERID = $bookerID AND b.$this->COLUMN_BOOKERID = u.StudentID AND b.$this->COLUMN_BOOKING_DATE = $bookingDate AND b.$this->COLUMN_BOOKING_START_TIME = $bookingStartTime AND b.$this->COLUMN_BOOKING_END_TIME
-					GROUP BY b.$this->COLUMN_BOOKING_DATE";
+		$queryStr = "SELECT $this->COLUMN_BOOKING_DATE, $this->COLUMN_SPORT, $this->COLUMN_BOOKERID, $this->COLUMN_BOOKING_START_TIME, $this->COLUMN_BOOKING_END_TIME
+					FROM $this->TABLE_BOOKING  WHERE $this->COLUMN_BOOKERID = '$bookerID' AND  $this->COLUMN_BOOKING_DATE = '$bookingDate' AND $this->COLUMN_BOOKING_START_TIME < '$bookingEndTime' AND $this->COLUMN_BOOKING_END_TIME > '$bookingStartTime' AND $this->COLUMN_SPORT = '$sport'
+					GROUP BY $this->COLUMN_BOOKING_DATE";
 
 		$result = $bookingTable->query($queryStr);
 
@@ -81,7 +81,6 @@ class BookingModel {
 				$booking[$i][$this->COLUMN_BOOKING_START_TIME] = $row[$this->COLUMN_BOOKING_DATE];
 				$booking[$i][$this->COLUMN_BOOKING_END_TIME] = $row[$this->COLUMN_BOOKING_END_TIME];
 				$booking[$i][$this->COLUMN_SPORT] = $row[$this->COLUMN_SPORT];
-				$booking[$i][$this->COLUMN_COURTID] = $row[$this->COLUMN_COURTID];
 			}
 		}
 
@@ -131,17 +130,16 @@ class BookingModel {
 			throw new Exception("We are currently experiencing some heavy traffic. Please try again later.");
 		}
 
-		$queryStr = "SELECT b.$this->COLUMN_BOOKINGID, b.$this->COLUMN_BOOKING_DATE, u.StudentFirstName, u.StudentLastName, b.$this->COLUMN_BOOKERID, b.$this->COLUMN_BOOKING_START_TIME, b.$this->COLUMN_BOOKING_END_TIME FROM $this->TABLE_BOOKING b, Student u WHERE b.$this->COLUMN_BOOKERID = u.StudentID";
+		$queryStr = "SELECT * FROM $this->TABLE_BOOKING ORDER BY $this->COLUMN_BOOKING_DATE";
         
 		$result = $bookingTable->query($queryStr);
 
 		if ($bookingTable->affected_rows > 0) {
 			for ($i=0; $i < $result->num_rows; $i++) { 
 				$row = $result->fetch_assoc();
-				$booking[$i][$this->COLUMN_BOOKINGID] = $row[$this->COLUMN_BOOKINGID];
 				$booking[$i][$this->COLUMN_BOOKERID] = $row[$this->COLUMN_BOOKERID];
 				$booking[$i][$this->COLUMN_BOOKING_DATE] = $row[$this->COLUMN_BOOKING_DATE];
-				$booking[$i][$this->COLUMN_BOOKING_START_TIME] = $row[$this->COLUMN_BOOKING_DATE];
+				$booking[$i][$this->COLUMN_BOOKING_START_TIME] = $row[$this->COLUMN_BOOKING_START_TIME];
 				$booking[$i][$this->COLUMN_BOOKING_END_TIME] = $row[$this->COLUMN_BOOKING_END_TIME];
 				$booking[$i][$this->COLUMN_SPORT] = $row[$this->COLUMN_SPORT];
 				$booking[$i][$this->COLUMN_COURTID] = $row[$this->COLUMN_COURTID];
@@ -185,6 +183,34 @@ class BookingModel {
 
         return $booking;
 	}
+
+public function deleteBooking($bookerID, $bookingDate)
+	{
+		//$booking = null;
+		$config = new DBConfiguration();
+
+		$bookingTable = new mysqli($config->getDbHost(), $config->getDbUserName(), $config->getDbPassword(), $config->getDbName());
+
+		if (strcmp($bookingTable->connect_error, "") != 0) {
+			throw new Exception("We are currently experiencing some heavy traffic. Please try again later.");
+		}
+
+		$queryStr = "DELETE FROM $this->TABLE_BOOKING WHERE $this->COLUMN_BOOKERID = '$bookerID' AND $this->COLUMN_BOOKING_DATE = '$bookingDate'";
+
+		$result = $bookingTable->query($queryStr);
+
+		/*if ($bookingTable->affected_rows > 0) {
+			for ($i=0; $i < $result->num_rows; $i++) { 
+				$row = $result->fetch_assoc();
+				$booking[$i][$this->COLUMN_BOOKERID] = $row[$this->COLUMN_BOOKERID];
+				$booking[$i][$this->COLUMN_BOOKING_DATE] = $row[$this->COLUMN_BOOKING_DATE];
+			}
+		}*/
+
+		$bookingTable->close();
+		return $result;
+	}
+
 }
 
 ?>

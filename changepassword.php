@@ -19,48 +19,56 @@ $changePasswordView->validateSession();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Account Setting | Swinburne MPH Booking </title>
-       
+        <title>SSFO | Change Password</title>
+        <!-- 1140px Grid styles for IE -->
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
+
+        <!-- The 1140px Grid - http://cssgrid.net/ -->
+        <link rel="stylesheet" href="css/1140.css" type="text/css" media="screen" />
+        
+        <!-- Your styles -->
+        <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
+        
+        <!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
+        <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
     </head>
     <body>
-       
-       
-                <h2>Change User Password</h2>
-           
-                    <h2>
-                        Change Password
-                    </h2>
-                    
-                        <form action="changepassword.php" method="post">
-                            <fieldset>
-                                <p>Change your password.</p>
-                            <?php 
-                            /**if(isset($_POST['ss']))
-                            {
-        
-                            if($_POST['ss'] == "student")
-                                {$changePasswordView->changeStudentPassword();}
-                                
-                            else if($_POST['ss'] = "staff")
-                                {$changePasswordView->changeStaffPassword();} 
-                            }**/
-                          $changePasswordView->changeUserPassword();
-                            ?>
-                                
-                                    <label>Current Password: </label>
-                                    <input type="text" name="Password" />
-                                </p>
-                                <p>
-                                    <label>New Password: </label>
-                                    <input type="password" name="NewPassword" />
-                                </p>
-                                <p>
-                                    <label>Repeat New Password: </label>
-                                    <input type="password" name="RepeatNewPassword" />
-                                </p>
-                                <input type="submit" name="Submit" value="Change Password" />
-                            </fieldset>					
-                        </form>
+        <?php include 'inc/header.php' ?>
+        <?php include 'inc/navbar.php' ?>
+            <div class="container centerObjects">
+            <div class="row">
+            <fieldset>
+                <legend class="centerObjects">Change Password</legend>
+                <form action="changepassword.php" method="post">
+                    <?php 
+                        $changePasswordView->changeUserPassword();
+                    ?>
+                    <div class="row">
+                        <div class="fourcol"></div>
+                        <div class="twocol"><label for = "Password">Current Password: </label></div>
+                        <div class="twocol"><input type="text" name="Password" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="fourcol"></div>
+                        <div class="twocol"><label for = "NewPassword">New Password: </label></div>
+                        <div class="twocol"><input type="password" name="NewPassword" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="fourcol"></div>
+                        <div class="twocol"><label for = "RepeatNewPassword">Repeat New Password: </label></div>
+                        <div class="twocol"><input type="password" name="RepeatNewPassword" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="fourcol"></div>
+                        <div class="twocol"></div>
+                        <div class="twocol">
+                            <input type="submit" name="Submit" value="Change Password" />
+                        </div>
+                    </div>		
+                </form>
+            </fieldset> 
+            </div>
+            </div>
                    
             <?php include('footer.php'); ?>
         

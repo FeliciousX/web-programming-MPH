@@ -7,19 +7,24 @@ require_once('controller/SportsController.php');
 $bookingController = new BookingController();
 $sportsController = new SportsController();
 
-if($_POST['duration']>=6)
+if($_POST['duration']==12)
 {
-	$afterMinutes = 0;
-	$afterHour = $_POST['starthour'] + ($_POST['duration']/6);
+	$afterMinutes = $_POST['startminutes'];
+	$afterHour = $_POST['starthour'] + 2;
 }
-else if($_POST['startminutes'] + $_POST['duration'] == 6)
+else if($_POST['duration']==6)
 {
-	$afterMinutes = 0;
+	$afterMinutes = $_POST['startminutes'];
+	$afterHour = $_POST['starthour'] + 1;
+}
+else if($_POST['startminutes'] + $_POST['duration'] == 6) //half hour
+{
+	$afterMinutes = $_POST['startminutes'];
 	$afterHour = $_POST['starthour'] + 1;
 }
 else
 {
-	$afterMinutes = $_POST['duration'];
+	$afterMinutes = $_POST['startminutes'];
 	$afterHour = $_POST['starthour'];
 }
 
@@ -73,13 +78,23 @@ else if($sports=="MultistoreyCarpark") {
 			<legend class="centerObjects">Booking Status</legend>
 			<div class="row">
 				<div class="twocol"> </div>
-				<div class="fourcol last">
+				<div class="fourcol">
 				<?php
 				if($afterTime<=230000) {
-					if($sportsController->checkRoomStatus($_POST['date'], $startTime, $afterTime, $sports)) {
+					if($sportsController->checkRoomStatus($_POST['date'], $startTime, $afterTime, $sports, $_POST['day'])) {
 						if($sports=="Basketball") {
-							if($bookingController->getBooking($_POST['date'], $startTime, $afterTime, 6))
-								$courtID = 7;
+							if($_POST['court'] == "true") {
+								if(!($bookingController->getBooking($_POST['date'], $startTime, $afterTime, 5)))
+									$courtID = 5;
+							}
+							else {
+								if($_POST['day']=="Sunday")
+									$courtID = 7;
+								else {
+									if($bookingController->getBooking($_POST['date'], $startTime, $afterTime, 6))
+										$courtID = 7;
+								}
+							}
 						}
 						else if($sports=="Badminton") {
 							do {
@@ -113,6 +128,7 @@ else if($sports=="MultistoreyCarpark") {
 				}
 				?>
 				</div>
+				<div class="threecol last"></div>
 			</div>
 		</fieldset>
 	</div>

@@ -1,7 +1,6 @@
 <?php
 require_once('controller/SessionManager.php');
 require_once('controller/SportsController.php');
-require_once('controller/BookingController.php');
 
 class IndexView {
 
@@ -11,7 +10,7 @@ class IndexView {
 	
 		$sessionManager = new SessionManager();
 		$sportsController = new SportsController();
-		$bookingController = new BookingController();
+		
 
 		// Display the days
 	    $today = getdate(date('U'));
@@ -117,27 +116,34 @@ class IndexView {
 					$fullAfter = $afterHour . $afterMinutes . '0' . '00';
 					$roomStatus = false;
 					$availability = false;
-					$sportsController->validateSportsType($sportsType, $realWeek[$j], $timeHour, $roomStatus, $availability, $fullDate, $fullTime, $fullAfter);
+					$sportsController->validateSportsType($sportsType, $realWeek[$j], $timeHour, $roomStatus, $availability, $fullDate, $fullTime, $fullAfter, $realWeek[$j]);
 					if ($availability) {
-						if ($roomStatus)
-						{
-							echo '<td>
-									<form name="bookingForm" method="post" action="bookingpage.php">
-										<input name="dateday" type="hidden" value = "' . $dateDay . '"/> 
-										<input name="datemonth" type="hidden" value = "' . $dateMonth . '"/> 
-										<input name="dateyear" type="hidden" value = "' . $dateYear . '"/> 
-										<input name="timeinfo" type = "hidden" value = "' .  $timeHour . $timeMinutes . 0 . '" />
-										<input name="dayinfo" type = "hidden" value = "' .  $realWeek[$j] . '" />
-										<input name="starthour" type="hidden" value="'. $timeHour . '"/>
-										<input name="startminutes" type="hidden" value="'. $timeMinutes . '"/>
-										<input name="sports" type="hidden" value="'. $sportsType . '"/>
-										<button class="btnAvailable" type="submit">Available</button>
-									</form>
-								 </td>';
+						if($sportsController->validateOwnBooking($_SESSION['ID'], $fullDate, $fullTime, $fullAfter, $sportsType)) {
+							echo '<td><form name = "cancelReservationForm" method="post" action="cancelreservation.php">
+									<input name="date" type="hidden" value="'. $fullDate .'" />
+									<button class="btnOwnBooking" type="submit" onmouseover="changetext('. $fullTime .');" onmouseout="changeback('. $fullTime .');"><div id="lblDelete'. $fullTime .'">Yours</div></button></form></td>';
 						}
-						else 
-						{
-							echo '<td><button class="btnUnavailable" type="submit">Booked</button></td>';
+						else {
+							if ($roomStatus)
+							{
+								echo '<td>
+										<form name="bookingForm" method="post" action="bookingpage.php">
+											<input name="dateday" type="hidden" value = "' . $dateDay . '"/> 
+											<input name="datemonth" type="hidden" value = "' . $dateMonth . '"/> 
+											<input name="dateyear" type="hidden" value = "' . $dateYear . '"/> 
+											<input name="timeinfo" type = "hidden" value = "' .  $timeHour . $timeMinutes . 0 . '" />
+											<input name="dayinfo" type = "hidden" value = "' .  $realWeek[$j] . '" />
+											<input name="starthour" type="hidden" value="'. $timeHour . '"/>
+											<input name="startminutes" type="hidden" value="'. $timeMinutes . '"/>
+											<input name="sports" type="hidden" value="'. $sportsType . '"/>
+											<button class="btnAvailable" type="submit">Available</button>
+										</form>
+									 </td>';
+							}
+							else 
+							{
+								echo '<td><button class="btnUnavailable">Booked</button></td>';
+							}
 						}
 					}
 					else {

@@ -44,6 +44,22 @@
 
 	    return null;
 	}
+
+	function changetext(num)
+	{
+		var textchange2 = "Cancel";
+		var label = "lblDelete" + num;
+		var id = document.getElementById(label);
+		id.innerHTML=textchange2;
+	}
+
+	function changeback(num)
+	{
+		var textchange2 = "Yours";
+		var label = "lblDelete" + num;
+		var id = document.getElementById(label);
+		id.innerHTML=textchange2;
+	}
 	</script>
 </head>
 

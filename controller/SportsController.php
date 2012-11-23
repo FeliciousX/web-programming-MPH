@@ -3,26 +3,26 @@ require_once('controller/BookingController.php');
 
 
 class SportsController {
-	function validateSportsType($sportsType, $day, $timeHour, &$roomStatus, &$availability, $fullDate, $fullTime, $fullAfter) {
+	function validateSportsType($sportsType, $day, $timeHour, &$roomStatus, &$availability, $fullDate, $fullTime, $fullAfter, $day) {
 		if($sportsType=="Basketball") {
 			$availability = $this->validateBasketball($day, $timeHour);
-			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType);
+			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day);
 		}
 		else if($sportsType=="Badminton") {
 			$availability = $this->validateBadminton($day, $timeHour);
-			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType);
+			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day);
 		}
 		else if($sportsType=="TableTennis") {
 			$availability = $this->validateTableTennis($day, $timeHour);
-			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType);
+			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day);
 		}
 		else if($sportsType=="Squash") {
 			$availability = $this->validateSquash($day, $timeHour);
-			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType);
+			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day);
 		}
 		else if($sportsType=="MultistoreyCarpark") {
 			$availability = $this->validateMultistoreyCarpark($day, $timeHour);
-			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType);
+			$roomStatus = $this->checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day);
 		}
 	}
 
@@ -118,12 +118,23 @@ class SportsController {
 		return false;
 	}
 
-	function checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType) {
+	function checkRoomStatus($fullDate, $fullTime, $fullAfter, $sportsType, $day) {
 		$bookingController = new BookingController();
-		//$totalCourt=0;
 
 		if($sportsType=="Badminton"||$sportsType=="Basketball")
 		{
+			if($day=="Sunday") {
+				if($sportsType=="Badminton") {
+					if($bookingController->getBooking($fullDate, $fullTime, $fullAfter, 1)&&$bookingController->getBooking($fullDate, $fullTime, $fullAfter, 2)) {
+						return false;
+					}
+				}
+				else if($sportsType=="Basketball") {
+					if($bookingController->getBooking($fullDate, $fullTime, $fullAfter, 7)) {
+						return false;
+					}
+				}
+			}
 			if($bookingController->getBooking($fullDate, $fullTime, $fullAfter, 5) || ($bookingController->getBooking($fullDate, $fullTime, $fullAfter, 1)&&$bookingController->getBooking($fullDate, $fullTime, $fullAfter, 2)&&$bookingController->getBooking($fullDate, $fullTime, $fullAfter, 3)&&$bookingController->getBooking($fullDate, $fullTime, $fullAfter, 4)) || ($bookingController->getBooking($fullDate, $fullTime, $fullAfter, 6) && $bookingController->getBooking($fullDate, $fullTime, $fullAfter, 7)) )
 				return false;
 		}
@@ -141,6 +152,15 @@ class SportsController {
 		}
 
 		return true;
+	}
+
+	function validateOwnBooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport) {
+		$bookingController = new BookingController();
+
+		if($bookingController->getOwnBooking($bookerID, $bookingDate, $bookingStartTime, $bookingEndTime, $sport))
+			return true;
+
+		return false;
 	}
 }
 ?>

@@ -26,9 +26,9 @@ require_once('view/LoginView.php');
 				<div class="threecol topmargin3px">
 					<a href="index.php" class="button" style="height:27px; padding-top:4px;">Home</a>
 				</div>
-				<div class="threecol topmargin3px">
-					<a href="aboutus.php" class="button" style="height:27px; padding-top:4px;">About Us</a>
-				</div>
+				<div class="threecol topmargin3px">';
+					$loginView->validateShowBookingButton();
+	echo '		</div>
 				<div class="threecol">'; 
 					$loginView->validatePrivilegeButton(); 
 	echo '		</div>
