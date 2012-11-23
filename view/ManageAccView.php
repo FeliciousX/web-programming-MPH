@@ -46,7 +46,7 @@ class ManageAccView{
 					echo'<tbody>';
 					for($i = 0;$i<sizeof($sResult);$i++){
 					echo'<tr>';
-					echo'<form action = "ManageAcc.php" method = "post">';
+					echo'<form action = "manage_acc.php" method = "post">';
 					echo '<td><input type="text" value="' . $sResult[$i]['StudentID'] . '" name="studentID" readonly="readonly" /></td>';
                     echo '<td>' . $sResult[$i]['StudentFirstName'] . '</td>';
                     echo '<td>' . $sResult[$i]['StudentLastName'] . '</td>';
@@ -79,7 +79,7 @@ class ManageAccView{
             echo '<tbody>';
             for ($i = 0; $i < sizeof($sList); $i++) {
                 echo '<tr>';
-                echo '<form action="ManageAcc.php" method="post">';
+                echo '<form action="manage_acc.php" method="post">';
                 echo '<td><input type="text" value="' . $sList[$i]['StudentID'] . '" name="studentID" readonly="readonly" /></td>';
                 echo '<td>' . $sList[$i]['StudentFirstName'] . '</td>';
                 echo '<td>' . $sList[$i]['StudentLastName'] . '</td>';

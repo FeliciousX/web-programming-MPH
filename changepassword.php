@@ -62,7 +62,7 @@ $changePasswordView->validateSession();
                         <div class="fourcol"></div>
                         <div class="twocol"></div>
                         <div class="twocol">
-                            <input type="submit" name="Submit" value="Change Password" />
+                            <input type="submit" class="button" name="Submit" value="Change Password" />
                         </div>
                     </div>		
                 </form>

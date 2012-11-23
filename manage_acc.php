@@ -28,7 +28,7 @@
     <?php include 'inc/navbar.php' ?>
     <fieldset>
  	<legend class="centerObjects"><h2>Search Users</h2></legend>
- 	 	<form action="ManageAcc.php" method="post" class="centerObjects">
+ 	 	<form action="manage_acc.php" method="post" class="centerObjects">
             <label for="searchItem">Search:</label>
             <input type="text" name="searchItem" />
             <select name="type">
