@@ -19,12 +19,12 @@ else if($_POST['duration']==6)
 }
 else if($_POST['startminutes'] + $_POST['duration'] == 6) //half hour
 {
-	$afterMinutes = $_POST['startminutes'];
+	$afterMinutes = 0;
 	$afterHour = $_POST['starthour'] + 1;
 }
 else
 {
-	$afterMinutes = $_POST['startminutes'];
+	$afterMinutes = $_POST['startminutes'] + $_POST['duration'];
 	$afterHour = $_POST['starthour'];
 }
 
