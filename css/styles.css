@@ -366,6 +366,14 @@
 		max-width: 340px;
 	}
 
+	.error_message {
+		color: #FF0000;
+	}
+
+	.success_message {
+		color: #00FF00;
+	}
+	
 	.container { margin-top:5px; }
 	.centerText { text-align:center; }
 	.centerObjects {

@@ -113,8 +113,8 @@ try {
     $numOfSuccessfulTableCreated = $dbInstaller->setupDB();
 //    echo '<p>System Setup: ' . (($numOfSuccessfulTableCreated == 10) ? 'Successful' : 'Unsuccessful') . '<br />';
 //    echo 'Table created: ' . $numOfSuccessfulTableCreated . '/10</p>';
-    if ($numOfSuccessfulTableCreated == 3 && !is_null($numOfSuccessfulTableCreated)) {
-        echo 'boobs';
+    if ($numOfSuccessfulTableCreated == 3 && !is_null($numOfSuccessfulTableCreated)) { 
+        header('Location: registration.php');
     } else {
         echo '<p>System Setup: Not successful.<br />';
         echo ((is_numeric($numOfSuccessfulTableCreated)) ? 'Table(s) created: ' . $numOfSuccessfulTableCreated . '/3' : 'An error has occured.') . '</p>';

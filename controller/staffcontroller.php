@@ -251,7 +251,9 @@ public function register($staffID, $firstName, $lastName, $password, $repeatPass
 
             if ($result) {
                 $header = 'From: noreply@mph.swinburne.edu.my';
-                mail($staffID . '@swinburne.edu.my', 'Account Activation', 'Thank you for registering with the Swinburne Library Discussion Room Booking System. Your activation code: ' . $activationCode . 'Click this link http://' . $_SESSION['HTTP_HOST'] . '/activate.php?id=' . $staffID . '&code=' . $activationCode . ' to activate. If the link above is not working, go to this link to manually activate your account: ' . $_SERVER['HTTP_HOST'] . '/activate.php', $header);
+                mail($staffID . '@swinburne.edu.my', 'Account Activation', 'Thank you for registering with the Swinburne Library Discussion Room Booking System. Your activation code: ' . $activationCode
+                     . ' . Click this link to automatically activate your account. http://polytestsite.site90.com/WebProgramming/activate.php?userID=' . $staffID . '&code=' . $activationCode
+                     . ' or click this link to enter your code manually http://polytestsite.site90.com/WebProgramming/activate.php', $header);
             } else {
                 throw new Exception('Staff ID already exist.');
             }
