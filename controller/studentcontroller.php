@@ -237,7 +237,7 @@ class StudentController {
             if ($result) {
                 $header = 'From: noreply@mph.swinburne.edu.my';
                 mail($studentID . '@students.swinburne.edu.my', 'Account Activation', 'Thank you for registering with the Swinburne Library Discussion Room Booking System. Your activation code: ' . $activationCode
-                     . ' . Click this link to automatically activate your account. http://polytestsite.site90.com/WebProgramming/activate.php?userID=' . $staffID . '&code=' . $activationCode
+                     . ' . Click this link to automatically activate your account. http://polytestsite.site90.com/WebProgramming/activate.php?userID=' . $studentID . '&code=' . $activationCode . '&activate=Activate'
                      . ' or click this link to enter your code manually http://polytestsite.site90.com/WebProgramming/activate.php', $header);
             } else {
                 throw new Exception('Student ID already exist.');
